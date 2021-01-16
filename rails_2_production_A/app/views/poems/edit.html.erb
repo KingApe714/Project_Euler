@@ -1,0 +1,12 @@
+<h1>Edit Poem Form</h1>
+<form action="<%=poem_url(@poem)%>" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+    <input type="hidden" name="_method" value="PATCH">
+    <label>Title
+        <input type="text" name="poem[title]" value="<%=@poem.title%>">
+    </label>
+    <label>Stanzas
+        <input type="text" name="poem[stanzas]" value="<%=@poem.stanzas%>">
+    </label>
+    <button>Save Edited Poem</button>
+</form>
