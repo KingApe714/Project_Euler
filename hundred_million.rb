@@ -92,4 +92,4 @@ def divisors_two(num)
   true
 end
 
-p sum_of_all_two(100_000_000)
+p sum_of_all_two(100_000)
