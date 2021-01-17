@@ -8,14 +8,14 @@
 
 def pentagons(n)
     
-    arr = [];
+    hash = {}; #make this a hash for faster look up
 
-    (9000..n).each do |i|
+    (1..n).each do |i|
         p = i * (3 * i - 1) / 2
-        arr << p
+        hash[p] = nil;
     end
 
-    arr
+    hash
 end
 #this function is really expensive and could use some optimizing.
 #what if I stored the sums that are pentagonal numbers in a hash.
@@ -23,19 +23,13 @@ end
 #this would at least speed up the look up time.
 def p_numbers(m)
 
-    arr = pentagons(m)
+    hash1 = pentagons(m)
+    hash2 = {}
 
-    (0...arr.length - 1).each do |i|
-        (i+1...arr.length).each do |j|
-            p1 = arr[i]
-            p2 = arr[j]
-            sum = p1 + p2;
-            dif = p2 - p1;
-            if arr.include?(sum) && arr.include?(dif)
-                return sum;
-            end
-        end
+    hash1.each_key do |key|
+
     end
+    
 end
 
-p p_numbers(12000)
+p p_numbers(1000)
