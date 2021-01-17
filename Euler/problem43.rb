@@ -24,9 +24,6 @@
 #start with [0,1,2], we want to look at the threes that start with [1,2]. Then loop through the last digits.
 #As long as the last digit IS NOT in the target array, then shovel it on then move to next prime.
 
-#
-
-
 def pandigital
     twos = Hash.new { |h, k| h[k] = Array.new };
     threes = Hash.new { |h, k| h[k] = Array.new };
@@ -36,11 +33,9 @@ def pandigital
     thirteens = Hash.new { |h, k| h[k] = Array.new };
     seventeens = [];
 
-    targets = []; #this will hold all of the arrays that make it through the entire process.
-
     (12..987).each do |el| #must create candidates starting with 012
-        num = non_repeating(el); #num is my array.
-        if num
+        num = non_repeating(el); #num is my array (or false depending on return value of helper)
+        if num  #begin the filter
             if el % 2 == 0
                 twos[num[1..2]] << num[0]
             end
@@ -65,38 +60,46 @@ def pandigital
         end
     end
 
-    #Must refactor and add seveenteens to this to dry up the code even more
     primes = [thirteens, elevens, sevens, fives, threes, twos]
     
-    t = [];
+    candidates = seventeens.clone;
 
-    #loop through seventeens and nest the primes array inside of it.
-    #if our helper function does not return false but returns the updated t then move to next prime
-    #if helper function returns false then move to the next
-    (0...seventeens.length).each do |idx17|
-        seventeen = seventeens[idx17]
-        f13 = thirteens[seventeen[0..1]]
-        t += seventeen
-        (0...primes.length).each do |i|
-            p = primes[i] #my hash of arrays
-            if i == 0 #I know that I'm looking at my thirteens hash
-                if p.has_key?(f13)
-                    #I want to be able to lop
-                var = next_digit(t, )
-            else
-
-            end
-        end
-        t = [];
+    #simply loop through primes array on this end and reset candidates rejecting all who don't meet criteria
+    primes.each do |prime|
+        candidates = next_digit(candidates, prime)
     end
 
+    candidates.each do |c| #loop through candidates and an array of all digits finding the one it doesn't already include then add to the front
+        [0,1,2,3,4,5,6,7,8,9].each do |d|
+            if !c.include?(d)
+                c.unshift(d)
+            end
+        end
+    end
+    p candidates
+    sum = 0
+    candidates.each do |c| #sum up all of the candidates
+        sum += c.join("").to_i
+    end
 
-    # p thirteens
-    # p seventeens
+    sum
 end
-#takes in the target array, 
-def next_digit(t, )
-
+#takes in the target array, and the current prime hash
+def next_digit(candidates, prime)
+    arr = [];
+    candidates.each do |c| #c is my list of non-repeating digits
+        l2 = c[0..1]; #l2 is my last 2 digits
+        if prime.has_key?(l2) #I store the last two digits as keys in the hash
+            #now I need to loop through the arrays of first digits
+            prime[l2].each do |f1|
+                if !c.include?(f1) #if my current candidate doesn't include that digit
+                    new_c = [f1] + c #then add that digit to the front of it
+                    arr << new_c #then shovel into my return array
+                end
+            end
+        end
+    end
+    arr
 end
 
 def non_repeating(num)
@@ -121,47 +124,4 @@ def non_repeating(num)
     arr
 end
 
-pandigital
-
-# threes[f3].each do |l3|
-#     if t.length == 3 && !t.include?(l3)
-#         t << l3
-#         f5 = t[-2..-1]
-#         fives[f5].each do |l5|
-#             if t.length == 4 && !t.include?(l5)
-#                 t << l5
-#                 f7 = t[-2..-1]
-#                 sevens[f7].each do |l7|
-#                     if t.length == 5 && !t.include?(l7)
-#                         t << l7
-#                         f11 = t[-2..-1]
-#                         elevens[f11].each do |l11|
-#                             if t.length == 6 && !t.include?(l11)
-#                                 t << l11
-#                                 f13 = t[-2..-1]
-#                                 thirteens[f13].each do |l13|
-#                                     if t.length == 7 && !t.include?(l13)
-#                                         t << l13
-#                                         f17 = t[-2..-1]
-#                                         seventeens[f17].each do |l17|
-#                                             if t.length == 8 && !t.include?(l17)
-#                                                 t << l17
-#                                                 digits = [0,1,2,3,4,5,6,7,8,9]
-#                                                 digits.each do |d|
-#                                                     if !t.include?(d)
-#                                                         t.unshift(d)
-#                                                     end
-#                                                 end
-#                                                 targets << t
-#                                             end
-#                                         end
-#                                     end
-#                                 end
-#                             end
-#                         end
-#                     end
-#                 end
-#             end
-#         end
-#     end
-# end
+p pandigital
