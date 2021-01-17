@@ -29,38 +29,38 @@
 
 def pandigital
     two = [];
-    three = [];
-    five = [];
-    seven = [];
-    eleven = [];
-    thirteen = [];
-    seventeen = [];
+    three = Hash.new { |h, k| h[k] = Array.new };
+    five = Hash.new { |h, k| h[k] = Array.new };
+    seven = Hash.new { |h, k| h[k] = Array.new };
+    eleven = Hash.new { |h, k| h[k] = Array.new };
+    thirteen = Hash.new { |h, k| h[k] = Array.new };
+    seventeen = Hash.new { |h, k| h[k] = Array.new };
 
     targets = []; #this will hold all of the arrays that make it through the entire process.
 
-    (12..987).each do |el| #must creat candidates starting with 012
-        num = non_repeating(el); #num is my hash.
+    (12..987).each do |el| #must create candidates starting with 012
+        num = non_repeating(el); #num is my array.
         if num
             if el % 2 == 0
                 two << num
             end
             if el % 3 == 0
-                three << num
+                three[num[0..1]] << num[2]
             end
             if el % 5 == 0
-                five << num
+                five[num[0..1]] << num[2]
             end
             if el % 7 == 0
-                seven << num
+                seven[num[0..1]] << num[2]
             end
             if el % 11 == 0
-                eleven << num
+                eleven[num[0..1]] << num[2]
             end
             if el % 13 == 0
-                thirteen << num
+                thirteen[num[0..1]] << num[2]
             end
             if el % 17 == 0
-                seventeen << num
+                seventeen[num[0..1]] << num[2]
             end
         end
     end
@@ -77,7 +77,6 @@ end
 
 def non_repeating(num)
     arr = [];
-    hash = {}
     num_clone = num.clone
     while num >= 1
         n = num % 10;
@@ -95,8 +94,7 @@ def non_repeating(num)
             arr.unshift(0)
         end
     end
-    hash[arr[0..1]] = arr[2]
-    hash
+    arr
 end
 
 pandigital
