@@ -28,13 +28,13 @@
 
 
 def pandigital
-    twos = [];
+    twos = Hash.new { |h, k| h[k] = Array.new };
     threes = Hash.new { |h, k| h[k] = Array.new };
     fives = Hash.new { |h, k| h[k] = Array.new };
     sevens = Hash.new { |h, k| h[k] = Array.new };
     elevens = Hash.new { |h, k| h[k] = Array.new };
     thirteens = Hash.new { |h, k| h[k] = Array.new };
-    seventeens = Hash.new { |h, k| h[k] = Array.new };
+    seventeens = [];
 
     targets = []; #this will hold all of the arrays that make it through the entire process.
 
@@ -42,93 +42,62 @@ def pandigital
         num = non_repeating(el); #num is my array.
         if num
             if el % 2 == 0
-                twos << num
+                twos[num[1..2]] << num[0]
             end
             if el % 3 == 0
-                threes[num[0..1]] << num[2]
+                threes[num[1..2]] << num[0]
             end
             if el % 5 == 0
-                fives[num[0..1]] << num[2]
+                fives[num[1..2]] << num[0]
             end
             if el % 7 == 0
-                sevens[num[0..1]] << num[2]
+                sevens[num[1..2]] << num[0]
             end
             if el % 11 == 0
-                elevens[num[0..1]] << num[2]
+                elevens[num[1..2]] << num[0]
             end
             if el % 13 == 0
-                thirteens[num[0..1]] << num[2]
+                thirteens[num[1..2]] << num[0] #the first 2 digits of my 17s is the last two digits of my 13..
             end
             if el % 17 == 0
-                seventeens[num[0..1]] << num[2]
+                seventeens << num #I'd run a lot faster if I ran through the 17s array and went backward.
             end
         end
     end
 
-    #If I've reached the end of an inner array then I need to next one level up
-    twos.each do |two| #three digit array representing 3 digit number multiple of two
-        f3 = two[-2..-1] #grab the last two digits of the two array
-        t = two
-        threes[f3].each do |l3|
-            if t.length == 3 && !t.include?(l3)
-                t << l3
-                f5 = t[-2..-1]
-                fives[f5].each do |l5|
-                    if t.length == 4 && !t.include?(l5)
-                        t << l5
-                        f7 = t[-2..-1]
-                        sevens[f7].each do |l7|
-                            if t.length == 5 && !t.include?(l7)
-                                t << l7
-                                f11 = t[-2..-1]
-                                elevens[f11].each do |l11|
-                                    if t.length == 6 && !t.include?(l11)
-                                        t << l11
-                                        f13 = t[-2..-1]
-                                        thirteens[f13].each do |l13|
-                                            if t.length == 7 && !t.include?(l13)
-                                                t << l13
-                                                f17 = t[-2..-1]
-                                                seventeens[f17].each do |l17|
-                                                    if t.length == 8 && !t.include?(l17)
-                                                        t << l17
-                                                        digits = [0,1,2,3,4,5,6,7,8,9]
-                                                        digits.each do |d|
-                                                            if !t.include?(d)
-                                                                t.unshift(d)
-                                                            end
-                                                        end
-                                                        targets << t
-                                                    end
-                                                end
-                                            end
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
+    #Must refactor and add seveenteens to this to dry up the code even more
+    primes = [thirteens, elevens, sevens, fives, threes, twos]
     
-    sum = 0
-    targets.each do |tar|
-        p tar.join("").to_i
-        sum += tar.join("").to_i
+    t = [];
+
+    #loop through seventeens and nest the primes array inside of it.
+    #if our helper function does not return false but returns the updated t then move to next prime
+    #if helper function returns false then move to the next
+    (0...seventeens.length).each do |idx17|
+        seventeen = seventeens[idx17]
+        f13 = thirteens[seventeen[0..1]]
+        t += seventeen
+        (0...primes.length).each do |i|
+            p = primes[i] #my hash of arrays
+            if i == 0 #I know that I'm looking at my thirteens hash
+                if p.has_key?(f13)
+                    #I want to be able to lop
+                var = next_digit(t, )
+            else
+
+            end
+        end
+        t = [];
     end
-    # p "twos #{twos}"
-    # p "threes #{threes}"
-    # p "fives #{fives}"
-    # p "sevens #{sevens}"
-    # p "elevens #{elevens}"
-    # p "thirteens #{thirteens}"
-    # p "seventeens #{seventeens}"
-    sum
+
+
+    # p thirteens
+    # p seventeens
 end
+#takes in the target array, 
+def next_digit(t, )
 
-
+end
 
 def non_repeating(num)
     arr = [];
@@ -152,4 +121,47 @@ def non_repeating(num)
     arr
 end
 
-p pandigital
+pandigital
+
+# threes[f3].each do |l3|
+#     if t.length == 3 && !t.include?(l3)
+#         t << l3
+#         f5 = t[-2..-1]
+#         fives[f5].each do |l5|
+#             if t.length == 4 && !t.include?(l5)
+#                 t << l5
+#                 f7 = t[-2..-1]
+#                 sevens[f7].each do |l7|
+#                     if t.length == 5 && !t.include?(l7)
+#                         t << l7
+#                         f11 = t[-2..-1]
+#                         elevens[f11].each do |l11|
+#                             if t.length == 6 && !t.include?(l11)
+#                                 t << l11
+#                                 f13 = t[-2..-1]
+#                                 thirteens[f13].each do |l13|
+#                                     if t.length == 7 && !t.include?(l13)
+#                                         t << l13
+#                                         f17 = t[-2..-1]
+#                                         seventeens[f17].each do |l17|
+#                                             if t.length == 8 && !t.include?(l17)
+#                                                 t << l17
+#                                                 digits = [0,1,2,3,4,5,6,7,8,9]
+#                                                 digits.each do |d|
+#                                                     if !t.include?(d)
+#                                                         t.unshift(d)
+#                                                     end
+#                                                 end
+#                                                 targets << t
+#                                             end
+#                                         end
+#                                     end
+#                                 end
+#                             end
+#                         end
+#                     end
+#                 end
+#             end
+#         end
+#     end
+# end
