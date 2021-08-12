@@ -15,20 +15,20 @@ require 'prime'
 
 def conjecture
     arr = []
-    (3..1_000).step(2) do |n|
+    (3..1_000_000).step(2) do |n|
         unless n.prime?
             arr << n
         end
     end
-
-    Prime.each do |p|
+    (1..100).each do |num|
         arr.each do |el|
-
+            if (el - (2 * num ^ 2)).prime?
+                arr.delete(el)
+            end
         end
-
         p arr
     end
-    p arr
+    # p arr
 end
 
 conjecture
