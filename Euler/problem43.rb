@@ -60,6 +60,15 @@ def pandigital
         end
     end
 
+    p "twos: #{twos}"
+    p "threes: #{threes}"
+    p "fives: #{fives}"
+    p "sevens: #{sevens}"
+    p "elevens: #{elevens}"
+    p "thirteens: #{thirteens}"
+    p "seventeens: #{seventeens}"
+    p " "
+    p " "
     primes = [thirteens, elevens, sevens, fives, threes, twos]
     
     candidates = seventeens.clone;
@@ -76,7 +85,7 @@ def pandigital
             end
         end
     end
-    p candidates
+    candidates.each { |c| p c }
     sum = 0
     candidates.each do |c| #sum up all of the candidates
         sum += c.join("").to_i
@@ -89,9 +98,9 @@ def next_digit(candidates, prime)
     arr = [];
     candidates.each do |c| #c is my list of non-repeating digits
         l2 = c[0..1]; #l2 is my last 2 digits
-        if prime.has_key?(l2) #I store the last two digits as keys in the hash
+        if prime.has_key?(l2) #I store the last two digits as keys in the hash so I check if it exists
             #now I need to loop through the arrays of first digits
-            prime[l2].each do |f1|
+            prime[l2].each do |f1| #f1 is the first digit
                 if !c.include?(f1) #if my current candidate doesn't include that digit
                     new_c = [f1] + c #then add that digit to the front of it
                     arr << new_c #then shovel into my return array
@@ -99,6 +108,8 @@ def next_digit(candidates, prime)
             end
         end
     end
+    p arr
+    p "___"
     arr
 end
 
