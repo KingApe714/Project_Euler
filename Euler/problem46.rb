@@ -11,6 +11,24 @@
 
 # What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?
 
+require 'prime'
+
 def conjecture
-    
+    arr = []
+    (3..1_000).step(2) do |n|
+        unless n.prime?
+            arr << n
+        end
+    end
+
+    Prime.each do |p|
+        arr.each do |el|
+
+        end
+
+        p arr
+    end
+    p arr
 end
+
+conjecture
