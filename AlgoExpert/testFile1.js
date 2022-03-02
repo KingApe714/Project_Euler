@@ -73,3 +73,21 @@ function sortedSquaredArray(array) {
       }
     return winner;
   }
+
+  function nonConstructibleChange(coins) {
+    // Write your code here.
+      coins.sort((a, b) => a - b)
+      console.log(coins)
+      //sort the array
+      //loop through the array then ad to the sum
+      //if the current coin is greater than the sum + 1 return currentSum + 1
+      let currentSum = 0;
+      for (let i = 0; i < coins.length; i++) {
+          if (coins[i] > currentSum + 1) return currentSum + 1
+          
+          currentSum += coins[i]
+          console.log(currentSum)
+      }
+      
+      return currentSum + 1;
+  }
