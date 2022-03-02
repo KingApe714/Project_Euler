@@ -25,3 +25,21 @@ function sortedSquaredArray(array) {
       
       return [];
   }
+
+  function isValidSubsequence(array, sequence) {
+    // Write your code here.
+      let step = 0 //used to step through sequence array
+      
+      for (let i = 0; i < array.length; i++) {
+          let seqEle = sequence[step];
+          let arrEle = array[i];
+          
+          if (seqEle === arrEle) {
+              step++
+          }
+          
+          if (step >= sequence.length) return true;
+      }
+      
+      return false;
+  }
