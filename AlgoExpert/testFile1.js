@@ -1,19 +1,22 @@
 function findClosestValueInBst(tree, target) {
     // Write your code here.
-      console.log(tree)
       let currentNode = tree;
-      while (currentNode.left || currentNode.right) {
-          let leftDif = Math.abs(currentNode.left.value - currentNode.value);
-          let rightDif = Math.abs(currentNode.right.value - currentNode.value);
+      let closest = Infinity;
+      while (currentNode) {
+          if (Math.abs(target - closest) > Math.abs(target - currentNode.value)) {
+              closest = currentNode.value
+          }
           
-          if (leftDif < rightDif) {
-              currentNode = currentNode.left
+          if (target < currentNode.value) {
+              currentNode = currentNode.left;
+          } else if (target > currentNode.value){
+              currentNode = currentNode.right;
           } else {
-              currentNode = currentNode.right
+              break;
           }
       }
       
-      return currentNode.value;
+      return closest;
   }
 
 function sortedSquaredArray(array) {
