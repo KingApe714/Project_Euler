@@ -1,3 +1,21 @@
+function findClosestValueInBst(tree, target) {
+    // Write your code here.
+      console.log(tree)
+      let currentNode = tree;
+      while (currentNode.left || currentNode.right) {
+          let leftDif = Math.abs(currentNode.left.value - currentNode.value);
+          let rightDif = Math.abs(currentNode.right.value - currentNode.value);
+          
+          if (leftDif < rightDif) {
+              currentNode = currentNode.left
+          } else {
+              currentNode = currentNode.right
+          }
+      }
+      
+      return currentNode.value;
+  }
+
 function sortedSquaredArray(array) {
     // Write your code here.
       let arr = []
