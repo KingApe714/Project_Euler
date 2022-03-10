@@ -106,3 +106,18 @@ function nodeDepths(root) {
       return sums
   }
   
+//I want to push the name of all of the visited nodes into the empty array
+//I want to use the stack method in order properly DFS
+function depthFirstSearch(array) {
+    // Write your code here.
+    let stack = [this];
+    while (stack.length) {
+        let currentNode = stack.pop();
+        array.push(currentNode.name);
+        currentNode.children.reverse().forEach(child => {
+            stack.push(child)
+        })
+    }
+    
+    return array
+}
