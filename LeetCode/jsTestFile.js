@@ -81,3 +81,28 @@ var lengthOfLongestSubstring = function(s) {
     }
     return true
 };
+
+//create a sums integer to add up all total sums
+//collect all current sums and add one to their children
+//two dimensional queue for the solution
+
+function nodeDepths(root) {
+    // Write your code here.
+      let sums = 0;
+      let queue = [[root, 0]];
+      while (queue.length) {
+          let currentCheck = queue.shift()
+          sums += currentCheck[1];
+          if (currentCheck[0].left) {
+              let leftSum = currentCheck[1] + 1;
+              queue.push([currentCheck[0].left, leftSum])
+          }
+          if (currentCheck[0].right) {
+              let rightSum = currentCheck[1] + 1;
+              queue.push([currentCheck[0].right, rightSum])
+          }
+      }
+      
+      return sums
+  }
+  
