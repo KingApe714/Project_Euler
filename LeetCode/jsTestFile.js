@@ -62,3 +62,22 @@ var lengthOfLongestSubstring = function(s) {
         return 0
     }
 };
+
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+ var isPalindrome = function(x) {
+    var pal = x.toString().split('')
+    var j = pal.length - 1
+    var i = 0
+    while( i < j ){
+        if (pal[i] != pal[j]){
+            return false
+        } else {
+            i += 1
+            j -= 1
+        }
+    }
+    return true
+};
