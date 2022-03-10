@@ -112,3 +112,42 @@ function sortedSquaredArray(array) {
       
       return currentSum + 1;
   }
+
+  // This is the class of the input root.
+// Do not edit it.
+class BinaryTree {
+    constructor(value) {
+      this.value = value;
+      this.left = null;
+      this.right = null;
+    }
+  }
+  //So I am traversing the tree and adding up all the nodes until I reach
+  //leaf nodes
+  //I can assign each node with the sum of each their branch sums
+  //Then I record whether I am looking at a leaf node in which case I add
+  //to the array that I am returning
+  //BFS through the tree iteratively use a stack
+  function branchSums(root) {
+    // Write your code here.
+      let sums = []
+      //pos 1 of the inner queue array will always be the total sum leading
+      //up to that particular node
+      let stack = [[root, root.value]];
+      while(stack.length) {
+          let currentCheck = stack.pop() //grab from the front
+          //check to see if it is a leaf node
+          if (!currentCheck[0].left && !currentCheck[0].right) { //if no children then leaf
+              sums.push(currentCheck[1])
+          }
+          if (currentCheck[0].right) { //I know that it has a right child
+              let rightSum = currentCheck[0].right.value + currentCheck[1]
+              stack.push([currentCheck[0].right, rightSum])
+          }
+          if (currentCheck[0].left) { //I know that it has a left child
+              let leftSum = currentCheck[0].left.value + currentCheck[1]
+              stack.push([currentCheck[0].left, leftSum])
+          }
+      }
+      return sums
+  }
