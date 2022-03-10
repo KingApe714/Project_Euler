@@ -25,3 +25,21 @@ var lengthOfLongestSubstring = function(s) {
     
     return result
 };
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+ var twoSum = function(nums, target) {
+    var response;
+       nums.forEach((singNum, index)=>{
+             for(j = index+1; j < nums.length; j++){
+                if (nums[index] + nums[j] == target){
+                    response = [index, j];
+                }
+            }
+    })
+   return response;
+    //2 numbers index
+};
