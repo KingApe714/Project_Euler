@@ -43,3 +43,22 @@ var lengthOfLongestSubstring = function(s) {
    return response;
     //2 numbers index
 };
+
+/**
+ * @param {number} x
+ * @return {number}
+ */
+ var reverse = function(x) {
+    var negCheck = 1
+    if(x < 0){
+        negCheck = -1
+        x *= -1
+    }
+    var b = x.toString().split('').reverse()
+    var back = parseInt(b.join('')) * negCheck
+    if (back > Math.pow(-2,31) && back < Math.pow(2,31) - 1){
+        return back
+    } else {
+        return 0
+    }
+};
