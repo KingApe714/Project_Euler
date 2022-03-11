@@ -135,3 +135,15 @@ function minimumWaitingTime(queries) {
       }
     return totalSum;
   }
+
+  function minimumWaitingTimeTwo(queries) {
+    // Write your code here.
+      queries.sort((a, b) => a - b);
+      let totalSum = 0;
+      let queriesLeft = queries.length - 1
+      for (let i = 0; i < queries.length - 1; i++) {
+          totalSum += queries[i] * queriesLeft
+          queriesLeft--
+      }
+    return totalSum;
+  }
