@@ -151,3 +151,86 @@ class BinaryTree {
       }
       return sums
   }
+
+  //create a sums integer to add up all total sums
+//collect all current sums and add one to their children
+//two dimensional queue for the solution
+
+function nodeDepths(root) {
+    // Write your code here.
+      let sums = 0;
+      let queue = [[root, 0]];
+      while (queue.length) {
+          let currentCheck = queue.shift()
+          sums += currentCheck[1];
+          if (currentCheck[0].left) {
+              let leftSum = currentCheck[1] + 1;
+              queue.push([currentCheck[0].left, leftSum])
+          }
+          if (currentCheck[0].right) {
+              let rightSum = currentCheck[1] + 1;
+              queue.push([currentCheck[0].right, rightSum])
+          }
+      }
+      
+      return sums
+  }
+  
+//I want to push the name of all of the visited nodes into the empty array
+//I want to use the stack method in order properly DFS
+function depthFirstSearch(array) {
+    // Write your code here.
+    let stack = [this];
+    while (stack.length) {
+        let currentNode = stack.pop();
+        array.push(currentNode.name);
+        currentNode.children.reverse().forEach(child => {
+            stack.push(child)
+        })
+    }
+    
+    return array
+}
+
+//Build a text file that has all words in the dictionary
+
+function minimumWaitingTime(queries) {
+    // Write your code here.
+      queries.sort((a, b) => a - b)
+      let sum = 0
+      let totalSum = 0
+      for (let i = 0; i < queries.length - 1; i++) {
+          sum += queries[i]
+          totalSum += sum
+      }
+    return totalSum;
+  }
+
+  function minimumWaitingTimeTwo(queries) {
+    // Write your code here.
+      queries.sort((a, b) => a - b);
+      let totalSum = 0;
+      let queriesLeft = queries.length - 1
+      for (let i = 0; i < queries.length - 1; i++) {
+          totalSum += queries[i] * queriesLeft
+          queriesLeft--
+      }
+    return totalSum;
+  }
+
+  function classPhotos(redShirtHeights, blueShirtHeights) {
+    // Write your code here.
+      redShirtHeights.sort((a, b) => a - b)
+      blueShirtHeights.sort((a, b) => a - b)
+      //just make sure that the sign dif remains the same throughout
+      //have a variable that holds the sign from the start
+      let sign = Math.sign(redShirtHeights[0] - blueShirtHeights[0])
+      for (let i = 0; i < redShirtHeights.length; i++) {
+          if (Math.sign(redShirtHeights[i] - blueShirtHeights[i]) !== sign ||
+               redShirtHeights[i] === blueShirtHeights[i]) {
+              return false;
+          }
+      }
+      
+    return true;
+  }
