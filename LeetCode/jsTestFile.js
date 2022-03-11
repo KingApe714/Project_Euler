@@ -121,3 +121,17 @@ function depthFirstSearch(array) {
     
     return array
 }
+
+//Build a text file that has all words in the dictionary
+
+function minimumWaitingTime(queries) {
+    // Write your code here.
+      queries.sort((a, b) => a - b)
+      let sum = 0
+      let totalSum = 0
+      for (let i = 0; i < queries.length - 1; i++) {
+          sum += queries[i]
+          totalSum += sum
+      }
+    return totalSum;
+  }
