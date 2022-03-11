@@ -147,3 +147,20 @@ function minimumWaitingTime(queries) {
       }
     return totalSum;
   }
+
+  function classPhotos(redShirtHeights, blueShirtHeights) {
+    // Write your code here.
+      redShirtHeights.sort((a, b) => a - b)
+      blueShirtHeights.sort((a, b) => a - b)
+      //just make sure that the sign dif remains the same throughout
+      //have a variable that holds the sign from the start
+      let sign = Math.sign(redShirtHeights[0] - blueShirtHeights[0])
+      for (let i = 0; i < redShirtHeights.length; i++) {
+          if (Math.sign(redShirtHeights[i] - blueShirtHeights[i]) !== sign ||
+               redShirtHeights[i] === blueShirtHeights[i]) {
+              return false;
+          }
+      }
+      
+    return true;
+  }
