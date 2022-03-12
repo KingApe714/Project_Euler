@@ -234,3 +234,19 @@ function minimumWaitingTime(queries) {
       
     return true;
   }
+
+  function tandemBicycle(redShirtSpeeds, blueShirtSpeeds, fastest) {
+    // Write your code here.
+      redShirtSpeeds.sort((a, b) => a - b);
+      if (fastest) {
+          blueShirtSpeeds.sort((a, b) => b - a);
+      } else {
+          blueShirtSpeeds.sort((a, b) => a - b);
+      }
+      
+      let total = 0;
+      for (let i = 0; i < redShirtSpeeds.length; i++) {
+          total += Math.max(redShirtSpeeds[i], blueShirtSpeeds[i])
+      }
+    return total;
+  }
