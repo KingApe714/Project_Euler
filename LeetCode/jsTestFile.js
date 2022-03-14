@@ -81,3 +81,26 @@ var lengthOfLongestSubstring = function(s) {
     }
     return true
 };
+
+/**
+ * @param {number[][]} intervals
+ * @return {number[][]}
+ */
+ var merge = function(intervals) {
+    intervals.sort((a, b) => {
+        return a[0] - b[0]
+    })
+    let merged = [intervals[0]];
+	
+	for (let i = 1; i < intervals.length; i++) {
+		let [int1, int2] = intervals[i];
+        let [cur1, cur2] = merged[merged.length - 1];
+        if (int1 <= cur2) {
+            merged[merged.length - 1] = [cur1, Math.max(int2, cur2)]
+        } else {
+            merged.push(intervals[i])
+        }
+	}
+
+	return merged;
+};
