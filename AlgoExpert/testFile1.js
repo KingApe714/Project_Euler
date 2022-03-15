@@ -250,3 +250,19 @@ function minimumWaitingTime(queries) {
       }
     return total;
   }
+
+  function removeDuplicatesFromLinkedList(linkedList) {
+    // Write your code here.
+      let currentNode = linkedList
+      
+      while(currentNode) {
+          let nextNode = currentNode.next;
+          while(nextNode && currentNode.value === nextNode.value) {
+              nextNode = nextNode.next;
+          }
+          currentNode.next = nextNode
+          currentNode = currentNode.next
+      }
+      
+    return linkedList;
+  }
