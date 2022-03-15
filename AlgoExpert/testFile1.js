@@ -277,3 +277,19 @@ function getNthFib(n) {
     }
     return fibArray[fibArray.length - 1]
 }
+
+function getNthFibTwo(n) {
+    // Write your code here.
+    if (n === 1) return 0
+    if (n === 2 || n === 3) return 1
+    let [prev1, prev2] = [0, 1];
+    let count = 1;
+    let sum = 0
+    while (count < n - 1) {
+        sum = prev1 + prev2;
+        prev1 = prev2;
+        prev2 = sum;
+        count++
+    }
+    return sum
+}
