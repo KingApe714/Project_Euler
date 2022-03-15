@@ -196,73 +196,84 @@ function depthFirstSearch(array) {
 
 function minimumWaitingTime(queries) {
     // Write your code here.
-      queries.sort((a, b) => a - b)
-      let sum = 0
-      let totalSum = 0
-      for (let i = 0; i < queries.length - 1; i++) {
-          sum += queries[i]
-          totalSum += sum
-      }
-    return totalSum;
-  }
+    queries.sort((a, b) => a - b)
+    let sum = 0
+    let totalSum = 0
+    for (let i = 0; i < queries.length - 1; i++) {
+        sum += queries[i]
+        totalSum += sum
+    }
+return totalSum;
+}
 
-  function minimumWaitingTimeTwo(queries) {
-    // Write your code here.
-      queries.sort((a, b) => a - b);
-      let totalSum = 0;
-      let queriesLeft = queries.length - 1
-      for (let i = 0; i < queries.length - 1; i++) {
-          totalSum += queries[i] * queriesLeft
-          queriesLeft--
-      }
-    return totalSum;
-  }
+function minimumWaitingTimeTwo(queries) {
+// Write your code here.
+    queries.sort((a, b) => a - b);
+    let totalSum = 0;
+    let queriesLeft = queries.length - 1
+    for (let i = 0; i < queries.length - 1; i++) {
+        totalSum += queries[i] * queriesLeft
+        queriesLeft--
+    }
+return totalSum;
+}
 
-  function classPhotos(redShirtHeights, blueShirtHeights) {
-    // Write your code here.
-      redShirtHeights.sort((a, b) => a - b)
-      blueShirtHeights.sort((a, b) => a - b)
-      //just make sure that the sign dif remains the same throughout
-      //have a variable that holds the sign from the start
-      let sign = Math.sign(redShirtHeights[0] - blueShirtHeights[0])
-      for (let i = 0; i < redShirtHeights.length; i++) {
-          if (Math.sign(redShirtHeights[i] - blueShirtHeights[i]) !== sign ||
-               redShirtHeights[i] === blueShirtHeights[i]) {
-              return false;
-          }
-      }
-      
-    return true;
-  }
+function classPhotos(redShirtHeights, blueShirtHeights) {
+// Write your code here.
+    redShirtHeights.sort((a, b) => a - b)
+    blueShirtHeights.sort((a, b) => a - b)
+    //just make sure that the sign dif remains the same throughout
+    //have a variable that holds the sign from the start
+    let sign = Math.sign(redShirtHeights[0] - blueShirtHeights[0])
+    for (let i = 0; i < redShirtHeights.length; i++) {
+        if (Math.sign(redShirtHeights[i] - blueShirtHeights[i]) !== sign ||
+            redShirtHeights[i] === blueShirtHeights[i]) {
+            return false;
+        }
+    }
+    
+return true;
+}
 
-  function tandemBicycle(redShirtSpeeds, blueShirtSpeeds, fastest) {
-    // Write your code here.
-      redShirtSpeeds.sort((a, b) => a - b);
-      if (fastest) {
-          blueShirtSpeeds.sort((a, b) => b - a);
-      } else {
-          blueShirtSpeeds.sort((a, b) => a - b);
-      }
-      
-      let total = 0;
-      for (let i = 0; i < redShirtSpeeds.length; i++) {
-          total += Math.max(redShirtSpeeds[i], blueShirtSpeeds[i])
-      }
-    return total;
-  }
+function tandemBicycle(redShirtSpeeds, blueShirtSpeeds, fastest) {
+// Write your code here.
+    redShirtSpeeds.sort((a, b) => a - b);
+    if (fastest) {
+        blueShirtSpeeds.sort((a, b) => b - a);
+    } else {
+        blueShirtSpeeds.sort((a, b) => a - b);
+    }
+    
+    let total = 0;
+    for (let i = 0; i < redShirtSpeeds.length; i++) {
+        total += Math.max(redShirtSpeeds[i], blueShirtSpeeds[i])
+    }
+return total;
+}
 
-  function removeDuplicatesFromLinkedList(linkedList) {
+function removeDuplicatesFromLinkedList(linkedList) {
+// Write your code here.
+    let currentNode = linkedList
+    
+    while(currentNode) {
+        let nextNode = currentNode.next;
+        while(nextNode && currentNode.value === nextNode.value) {
+            nextNode = nextNode.next;
+        }
+        currentNode.next = nextNode
+        currentNode = currentNode.next
+    }
+    
+return linkedList;
+}
+
+function getNthFib(n) {
     // Write your code here.
-      let currentNode = linkedList
-      
-      while(currentNode) {
-          let nextNode = currentNode.next;
-          while(nextNode && currentNode.value === nextNode.value) {
-              nextNode = nextNode.next;
-          }
-          currentNode.next = nextNode
-          currentNode = currentNode.next
-      }
-      
-    return linkedList;
-  }
+    if (n === 1) return 0
+    let fibArray = [0, 1, 1];
+    while (fibArray.length < n) {
+        let sum = fibArray[fibArray.length - 1] + fibArray[fibArray.length -2]
+        fibArray.push(sum)
+    }
+    return fibArray[fibArray.length - 1]
+}
