@@ -480,3 +480,40 @@ function mergeOverlappingIntervals(array) {
     }
 return merged;
 }
+
+//I want to multiply my multiplier by 10 then multiply the current node
+//value by it then add it to its respecitve number
+//by the end of the two I want to add them together then create a new
+//Linked List with this number.
+function sumOfLinkedLists(linkedListOne, linkedListTwo) {
+    // Write your code here.
+    let newList = new LinkedList(0);
+    let num1 = 0;
+    let num2 = 0;
+    let multiplier = 1;
+    let currentNode1 = linkedListOne;
+    let currentNode2 = linkedListTwo;
+    while (currentNode1 || currentNode2) {
+        if (currentNode1) {
+            num1 += currentNode1.value * multiplier;
+            currentNode1 = currentNode1.next;
+        }
+        if (currentNode2) {
+            num2 += currentNode2.value * multiplier;
+            currentNode2 = currentNode2.next;
+        }
+        multiplier *= 10;
+    }
+    let sum = num1 + num2;
+    let currentNode = newList;
+    while(sum > 0) {
+        let currentValue = sum % 10;
+        sum = Math.floor(sum / 10)
+        currentNode.value = currentValue;
+        if (sum > 0) {
+            currentNode.next = new LinkedList;
+            currentNode = currentNode.next;
+        }
+    }
+return newList;
+}
