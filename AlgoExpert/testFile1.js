@@ -447,19 +447,36 @@ function reverseWordsInString(string) {
 return arr.reverse().join('');
 }
 
-function reverseWordsInStringTow(string) {
+function reverseWordsInStringTwo(string) {
     // Write your code here.
-      let str = '';
-      let word = '';
-      for (let i = string.length - 1; i >= 0; i--) {
-          let chr = string[i];
-          if (chr !== " ") { //I know that I am looking at a char
-              word = chr + word;
-          } else {
-              str += word
-              word = ''
-              str += ' '
-          }
-      }
-    return str + word;
-  }
+    let str = '';
+    let word = '';
+    for (let i = string.length - 1; i >= 0; i--) {
+        let chr = string[i];
+        if (chr !== " ") { //I know that I am looking at a char
+            word = chr + word;
+        } else {
+            str += word
+            word = ''
+            str += ' '
+        }
+    }
+return str + word;
+}
+
+function mergeOverlappingIntervals(array) {
+    // Write your code here.
+    array.sort((a, b) => a[0] - b[0])
+    
+    let merged = [array[0]];
+    for (let i = 1; i < array.length; i++) {
+        let [cur1, cur2] = merged[merged.length - 1];
+        let [int1, int2] = array[i]
+        if (int1 <= cur2) {
+            merged[merged.length - 1] = [cur1, Math.max(cur2, int2)]
+        } else {
+            merged.push(array[i])
+        }
+    }
+return merged;
+}
