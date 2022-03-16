@@ -420,4 +420,29 @@ function placeEle(largest, ele) {
     
     return largest;
 }
-  
+
+function reverseWordsInString(string) {
+    // Write your code here.
+    let arr = [];
+    let word = ''
+    let space = ''
+    for (let i = 0; i < string.length; i++) {
+        let chr = string[i];
+        if (chr !== ' ') { //I know that I am looking at a char
+            if (space.length){
+                arr.push(space)
+                space = ''
+            }
+            word += chr;
+        } else { //I know that I am looking as a space
+            if (word.length){
+                arr.push(word)
+                word = ''
+            }
+            space += ' ';
+        }
+    }
+    if (word.length) arr.push(word)
+    if (space.length) arr.push(space)
+return arr.reverse().join('');
+}
