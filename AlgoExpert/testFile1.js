@@ -375,3 +375,21 @@ function productSum(array, depth=1) {
     
     return pSum * depth
 }
+
+function binarySearch(array, target) {
+    // Write your code here.
+    if (array.length === 0) return -1;
+    
+    let mid = Math.floor(array.length / 2);
+    let left = array.slice(0, mid);
+    let right = array.slice(mid + 1);
+    
+    if (array[mid] === target) {
+        return mid
+    } else if (array[mid] > target) {
+        return binarySearch(left, target)
+    } else {
+        let res = binarySearch(right, target)
+        return res === -1 ? -1 : res + mid + 1 
+    }
+}
