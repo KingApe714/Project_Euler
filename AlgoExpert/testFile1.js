@@ -545,5 +545,29 @@ function sumOfLinkedListsTwo(linkedListOne, linkedListTwo) {
         }
         
     }
-return newList;
+    return newList;
+}
+
+function bubbleSort(array) {
+    // Write your code here.
+    let arr = array.slice();
+    let func = (left, right) => {
+        if (left < right) return -1;
+        if (left > right) return 1;
+        return 0;
+    }
+    let sorted = false;
+    while (!sorted) {
+        sorted = true;
+        for (let i = 0; i < arr.length - 1; i++) {
+            if (func(arr[i], arr[i + 1]) === 1) {
+                sorted = false;
+                let temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+            }
+        }
+    }
+    
+    return arr
 }
