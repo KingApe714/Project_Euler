@@ -295,33 +295,67 @@ function getNthFibTwo(n) {
 }
 
 function mergeSort(array) {
-    // Write your code here.
-      if (array.length <= 1) return array
-      let mid = Math.floor(array.length / 2);
-      let left = mergeSort(array.slice(0, mid));
-      let right = mergeSort(array.slice(mid));
-      
-      return merge(left, right)
-  }
+// Write your code here.
+    if (array.length <= 1) return array
+    let mid = Math.floor(array.length / 2);
+    let left = mergeSort(array.slice(0, mid));
+    let right = mergeSort(array.slice(mid));
+    
+    return merge(left, right)
+}
+
+function merge(left, right) {
+    let merged = []
+    let func = (left, right) => {
+    return left < right ? -1 : left > right ? 1 : 0;
+};
+    while (left.length && right.length) {
+        switch (func(left[0], right[0])) {
+    case -1:
+        merged.push(left.shift());
+        break;
+    case 0:
+        merged.push(left.shift());
+        break;
+    case 1:
+        merged.push(right.shift());
+        break;
+    }
+    }
+    merged = merged.concat(left, right);
+return merged;
+}
+
+function mergeSortedArrays(arrays) {
+// Write your code here.
+    let mergedArray = arrays.pop();
+    for (let i = 0; i < arrays.length; i++) {
+        mergedArray = merge(mergedArray, arrays[i]);
+    }
+    
+    return mergedArray;
+}
   
-  function merge(left, right) {
-      let merged = []
-      let func = (left, right) => {
-      return left < right ? -1 : left > right ? 1 : 0;
-    };
-      while (left.length && right.length) {
-          switch (func(left[0], right[0])) {
-        case -1:
-          merged.push(left.shift());
-          break;
-        case 0:
-          merged.push(left.shift());
-          break;
-        case 1:
-          merged.push(right.shift());
-          break;
-      }
-      }
-      merged = merged.concat(left, right);
-    return merged;
-  }
+function merge(arr1, arr2) {
+    let merged = [];
+    let func = (left, right) => {
+        if (left < right) return -1;
+        if (left > right) return 1;
+        return 0;
+    }
+    while(arr1.length && arr2.length) {
+        switch(func(arr1[0], arr2[0])) {
+            case -1:
+                merged.push(arr1.shift());
+                break;
+            case 0:
+                merged.push(arr1.shift());
+                break;
+            case 1:
+                merged.push(arr2.shift());
+                break;
+        }
+    }
+    
+    return merged.concat(arr1, arr2)
+}
