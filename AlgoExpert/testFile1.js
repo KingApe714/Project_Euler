@@ -517,3 +517,33 @@ function sumOfLinkedLists(linkedListOne, linkedListTwo) {
     }
 return newList;
 }
+
+//I want to loop through each of the lists simultaneously and start summing
+//the integers in place and hold a carry variable in the event there is one
+function sumOfLinkedListsTwo(linkedListOne, linkedListTwo) {
+    // Write your code here.
+    let newList = new LinkedList;
+    let carry = 0;
+    let currentLink1 = linkedListOne;
+    let currentLink2 = linkedListTwo;
+    let currentNode = newList;
+    while(currentLink1 || currentLink2 || carry) {
+        let val1 = currentLink1 ? currentLink1.value : 0
+        let val2 = currentLink2 ? currentLink2.value : 0
+        let sum = val1 + val2 + carry;
+        
+        let newVal = sum % 10; //ensure that we are looking at one digit
+        carry = sum > 9 ? 1 : 0; //if two digits can only ever be between 10 - 18
+        currentNode.value = newVal;
+        
+        currentLink1 = currentLink1 ? currentLink1.next : null;
+        currentLink2 = currentLink2 ? currentLink2.next : null;
+        
+        if (currentLink1 || currentLink2 || carry) {
+            currentNode.next = new LinkedList;
+            currentNode = currentNode.next
+        }
+        
+    }
+return newList;
+}
