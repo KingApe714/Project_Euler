@@ -293,3 +293,35 @@ function getNthFibTwo(n) {
     }
     return sum
 }
+
+function mergeSort(array) {
+    // Write your code here.
+      if (array.length <= 1) return array
+      let mid = Math.floor(array.length / 2);
+      let left = mergeSort(array.slice(0, mid));
+      let right = mergeSort(array.slice(mid));
+      
+      return merge(left, right)
+  }
+  
+  function merge(left, right) {
+      let merged = []
+      let func = (left, right) => {
+      return left < right ? -1 : left > right ? 1 : 0;
+    };
+      while (left.length && right.length) {
+          switch (func(left[0], right[0])) {
+        case -1:
+          merged.push(left.shift());
+          break;
+        case 0:
+          merged.push(left.shift());
+          break;
+        case 1:
+          merged.push(right.shift());
+          break;
+      }
+      }
+      merged = merged.concat(left, right);
+    return merged;
+  }
