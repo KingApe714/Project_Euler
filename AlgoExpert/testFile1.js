@@ -359,3 +359,19 @@ function merge(arr1, arr2) {
     
     return merged.concat(arr1, arr2)
 }
+
+function productSum(array, depth=1) {
+    // Write your code here.
+    let pSum = 0;
+    
+    for (let i = 0; i < array.length; i++) {
+        let ele = array[i]
+        if (Array.isArray(ele)) {
+            pSum += productSum(ele, depth + 1)
+        } else {
+            pSum += ele
+        }
+    }
+    
+    return pSum * depth
+}
