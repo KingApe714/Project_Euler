@@ -104,14 +104,3 @@ var lengthOfLongestSubstring = function(s) {
 
 	return merged;
 };
-
-function getNthFib(n) {
-    // Write your code here.
-    if (n === 1) return 0
-    let fibArray = [0, 1, 1];
-    while (fibArray.length < n) {
-        let sum = fibArray[fibArray.length - 1] + fibArray[fibArray.length -2]
-        fibArray.push(sum)
-    }
-    return fibArray[fibArray.length - 1]
-}
