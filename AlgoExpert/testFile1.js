@@ -393,3 +393,31 @@ function binarySearch(array, target) {
         return res === -1 ? -1 : res + mid + 1 
     }
 }
+
+//we want to be sure that we keep an O(n) time complexity
+//keep track of the three largest that we come accross
+//grab the first three values and assume they are the largest
+//be sure that the largest array remains sorted and replace currenet
+//ele with the lowest val in largest array if it is larger
+//then sort largest array
+function findThreeLargestNumbers(array) {
+    // Write your code here.
+    let largest = array.slice(0, 3).sort((a, b) => a - b);
+    
+    for (let i = 3; i < array.length; i++) {
+        placeEle(largest, array[i])
+    }
+    return largest
+}
+
+function placeEle(largest, ele) {
+    for (let i = 0; i < largest.length; i++) {
+        if (largest[i] < ele) {
+            largest[i] = ele
+            return largest.sort((a, b) => a - b)
+        }
+    }
+    
+    return largest;
+}
+  
