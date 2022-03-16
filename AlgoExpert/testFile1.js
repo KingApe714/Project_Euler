@@ -446,3 +446,20 @@ function reverseWordsInString(string) {
     if (space.length) arr.push(space)
 return arr.reverse().join('');
 }
+
+function reverseWordsInStringTow(string) {
+    // Write your code here.
+      let str = '';
+      let word = '';
+      for (let i = string.length - 1; i >= 0; i--) {
+          let chr = string[i];
+          if (chr !== " ") { //I know that I am looking at a char
+              word = chr + word;
+          } else {
+              str += word
+              word = ''
+              str += ' '
+          }
+      }
+    return str + word;
+  }
