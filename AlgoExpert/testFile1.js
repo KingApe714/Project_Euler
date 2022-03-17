@@ -636,3 +636,23 @@ function isPalindrome(string) {
     }
     return true;
 }
+
+function runLengthEncoding(string) {
+    // Write your code here.
+    let encode = '';
+    let count = 1;
+    for (let i = 0; i < string.length; i++) {
+        if (string[i] === string[i + 1]) {
+            count++;
+        } else {
+            if (count) encode += count + string[i]; //ensure count is not 0
+            count = 1;
+        }
+        if (count === 9) {
+            encode += count + string[i]
+            count = 0;
+        }
+    }
+    
+    return encode;
+}
