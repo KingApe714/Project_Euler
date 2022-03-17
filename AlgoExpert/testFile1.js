@@ -626,3 +626,13 @@ function largestRange(array) {
     }
     return longestRange;
 }
+
+function isPalindrome(string) {
+    // Write your code here.
+    if (string.length <= 1) return true;
+    for (let i = 0; i < Math.floor(string.length / 2); i++) {
+        let j = string.length - i - 1;
+        if (string[i] !== string[j]) return false;
+    }
+    return true;
+}
