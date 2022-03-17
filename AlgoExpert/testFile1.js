@@ -694,5 +694,32 @@ function firstNonRepeatingCharacter(string) {
     for (let i = 0; i < string.length; i++) {
         if (obj[string[i]] === 1) return i
     }
-return -1;
+    return -1;
+}
+
+function generateDocument(characters, document) {
+    // Write your code here.
+    if (characters.length < document.length) return false;
+    let obj1 = {};
+    let obj2 = {};
+    for (let chr of characters) {
+        if (obj1[chr]) {
+            obj1[chr]++;
+        } else {
+            obj1[chr] = 1;
+        }
+    }
+    for (let chr of document) {
+        if (obj2[chr]) {
+            obj2[chr]++;
+        } else {
+            obj2[chr] = 1;
+        }
+    }
+    for (let key in obj2) {
+        if (!obj1[key] || obj1[key] < obj2[key]) {
+            return false;
+        }
+    }
+return true;
 }
