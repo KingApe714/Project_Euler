@@ -770,3 +770,13 @@ class Node {
         return array
     }
 }
+
+function quickSort(array) {
+    // Write your code here.
+    if (array.length <= 1) return array
+    let pivot = array[0]
+    let left = quickSort(array.slice(1).filter(ele => ele <= pivot));
+    let right = quickSort(array.slice(1).filter(ele => ele > pivot));
+    
+    return left.concat([pivot]).concat(right)
+}
