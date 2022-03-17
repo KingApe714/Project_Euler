@@ -746,3 +746,27 @@ function threeNumberSort(array, order) {
     
     return newArr;
 }
+
+class Node {
+    constructor(name) {
+      this.name = name;
+      this.children = [];
+    }
+  
+    addChild(name) {
+      this.children.push(new Node(name));
+      return this;
+    }
+  
+      //store node names into the input array
+    breadthFirstSearch(array) {
+      // Write your code here.
+        let queue = [this];
+        while (queue.length) {
+            let currentNode = queue.shift();
+            array.push(currentNode.name);
+            queue = queue.concat(currentNode.children)
+        }
+        return array
+    }
+}
