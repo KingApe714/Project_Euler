@@ -592,3 +592,37 @@ function largestRange(array) {
     
     return [sub2[0], sub2[sub2.length - 1]]
 }
+
+//O(n)time O(n) space (Optimal)
+function largestRange(array) {
+    // Write your code here.
+    let longestLength = 0;
+    let longestRange = [];
+    let obj = {};
+    for (let ele of array) obj[ele] = true; //set all keys in obj
+    for (let key of array) {
+        if (obj[key]) { //I know that it's set to true
+            let currentLength = 1
+            let left = key - 1;
+            let right = key + 1;
+            obj[key] = false;
+            while(left in obj) {
+                obj[left] = false;
+                left--;
+                currentLength++;
+            }
+            while(right in obj) {
+                obj[right] = false;
+                right++;
+                currentLength++;
+            }
+            if (currentLength > longestLength) {
+                longestLength = currentLength;
+                longestRange = [left + 1, right - 1];
+            }
+        } else {
+            continue;
+        }
+    }
+    return longestRange;
+}
