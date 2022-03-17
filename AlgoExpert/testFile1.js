@@ -656,3 +656,27 @@ function runLengthEncoding(string) {
     
     return encode;
 }
+
+function runLengthEncodingTwo(string) {
+    // Write your code here.
+    let encode = [];
+    let count = 1;
+    for (let i = 0; i < string.length; i++) {
+        if (string[i] === string[i + 1]) {
+            count++;
+        } else {
+            if (count) {
+                encode.push(count);
+                encode.push(string[i]);
+            }
+            count = 1
+        }
+        if (count === 9) {
+            encode.push(9);
+            encode.push(string[i]);
+            count = 0;
+        }
+    }
+    
+    return encode.join('')
+}
