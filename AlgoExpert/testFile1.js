@@ -571,3 +571,24 @@ function bubbleSort(array) {
     
     return arr
 }
+
+function largestRange(array) {
+    // Write your code here.
+    if (array.length === 1) return [array[0], array[0]]
+    array.sort((a, b) => a - b);
+    
+    let sub1 = [array[0]];
+    let sub2 = [];
+    for (let i = 1; i < array.length; i++) {
+        if (sub1[sub1.length - 1] === array[i]) {
+            continue;
+        } else if (sub1[sub1.length - 1] === array[i] - 1) {
+            sub1.push(array[i])
+        } else {
+            sub1 = [array[i]]
+        }
+        if (sub1.length > sub2.length) sub2 = sub1
+    }
+    
+    return [sub2[0], sub2[sub2.length - 1]]
+}
