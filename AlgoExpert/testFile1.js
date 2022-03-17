@@ -723,3 +723,26 @@ function generateDocument(characters, document) {
     }
 return true;
 }
+
+function threeNumberSort(array, order) {
+    // Write your code here.
+    let obj = {};
+    let newArr = []
+    for (let num of array) {
+        if (obj[num]) {
+            obj[num]++;
+        } else {
+            obj[num] = 1;
+        }
+    }
+    
+    for (let n of order) {
+        let c = 1;
+        while (c <= obj[n]) {
+            newArr.push(n)
+            c++;
+        }
+    }
+    
+    return newArr;
+}
