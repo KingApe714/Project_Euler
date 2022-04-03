@@ -780,3 +780,22 @@ function quickSort(array) {
     
     return left.concat([pivot]).concat(right)
 }
+
+function groupAnagrams(words) {
+    // Write your code here.
+    let obj = {};
+    let arr = [];
+    for (let i = 0; i < words.length; i++) {
+        let sortedWord = words[i].split('').sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0))
+        if (obj[sortedWord]) {
+            obj[sortedWord].push(words[i])
+        } else {
+            obj[sortedWord] = [words[i]]
+        }
+    }
+    for (let key in obj) {
+        arr.push(obj[key])
+    }
+    
+    return arr;
+}
