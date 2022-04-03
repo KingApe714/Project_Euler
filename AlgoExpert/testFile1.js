@@ -807,5 +807,29 @@ function firstDuplicateValue(array) {
         if (array[absValue - 1] < 0) return absValue;
         array[absValue - 1] *= -1 //in case we are looking at 'n' we still catch it
     }
-return -1;
+    return -1;
+}
+
+function threeNumberSum(array, targetSum) {
+    // Write your code here.
+      array.sort((a, b) => a - b);
+    let nums = [];
+    
+    for (let i = 0; i < array.length - 2; i++) {
+        let pointer = array[i];
+        let lIdx = i + 1;
+        let rIdx = array.length - 1;
+        while(lIdx < rIdx){
+            let sum = pointer + array[lIdx] + array[rIdx]
+            if (sum === targetSum) {
+                nums.push([pointer, array[lIdx], array[rIdx]])
+                rIdx--
+                lIdx++
+            }
+            while (pointer + array[lIdx] + array[rIdx] > targetSum) rIdx--;
+            while (pointer + array[lIdx] + array[rIdx] < targetSum) lIdx++;
+        }
+    }
+    
+    return nums;
 }
