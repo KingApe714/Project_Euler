@@ -799,3 +799,13 @@ function groupAnagrams(words) {
     
     return arr;
 }
+
+function firstDuplicateValue(array) {
+    // Write your code here.
+    for (let i = 0; i < array.length; i++) {
+        let absValue = Math.abs(array[i])
+        if (array[absValue - 1] < 0) return absValue;
+        array[absValue - 1] *= -1 //in case we are looking at 'n' we still catch it
+    }
+return -1;
+}
