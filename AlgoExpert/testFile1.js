@@ -833,3 +833,21 @@ function threeNumberSum(array, targetSum) {
     
     return nums;
 }
+
+function moveElementToEnd(array, toMove) {
+    // Write your code here.
+    let j = array.length - 1;
+    for (let i = 0; i < array.length; i++) {
+        if (j < i) break;
+        
+        while (i < j && toMove === array[j]) j--;
+        
+        if (array[i] === toMove) {
+            let temp = array[j];
+            array[j] = array[i];
+            array[i] = temp;
+        }
+    }
+    
+    return array;
+}
