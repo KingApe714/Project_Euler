@@ -851,3 +851,21 @@ function moveElementToEnd(array, toMove) {
     
     return array;
 }
+
+function isMonotonic(array) {
+    // Write your code here.
+    if (array.length <= 1) return true
+    //Need variables that track whether array is entirely increasing and decreasing
+    let increasing = true;
+    let decreasing = true;
+    //adjacent elements that are equal make array monotonic
+    //lets look ahead one element and compare
+    for (let i = 0; i < array.length - 1; i++) {
+        let ele1 = array[i];
+        let ele2 = array[i + 1];
+        if (ele2 > ele1) decreasing = false;
+        if (ele2 < ele1) increasing = false;
+    }
+    
+    return decreasing || increasing;
+}
