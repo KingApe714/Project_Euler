@@ -120,3 +120,34 @@ var maxArea = function(height) {
     
     return maxArea
 };
+
+var addTwoNumbers = function(l1, l2) {
+    //we need to also return the sum in a reversed linkedList
+    let carry = 0; //this will check to see if I need to carry into the next digit
+    
+    let current1 = l1;
+    let current2 = l2;
+    let newList = new ListNode(0, null);
+    let currentSum = newList
+    while(current1 || current2 || carry) {
+        let num1 = current1 ? current1.val : 0;
+        let num2 = current2 ? current2.val : 0;
+        let sum = num1 + num2 + carry;
+        if (carry) carry = 0;
+        if (sum > 9) {
+            carry = 1
+            sum = sum - 10;
+        }
+        if (current1) current1 = current1.next;
+        if (current2) current2 = current2.next;
+        console.log(sum)
+        currentSum.val = sum;
+        if (current1 || current2 || carry) {
+            currentSum.next = new ListNode(0, null)
+            currentSum = currentSum.next;
+        }
+    }
+    console.log(newList)
+    
+    return newList;
+};
