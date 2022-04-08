@@ -869,3 +869,36 @@ function isMonotonic(array) {
     
     return decreasing || increasing;
 }
+
+function phoneNumberMnemonics(phoneNumber) {
+    // Write your code here.
+      let obj = {
+          "1": '1',
+          "2": 'abc',
+          "3": 'def',
+          "4": 'ghi',
+          "5": 'jkl',
+          "6": 'mno',
+          "7": 'pqrs',
+          "8": 'tuv',
+          "9": 'wxyz',
+          "0": '0'
+      }
+      let combos = [];
+      for (let i = 0; i < phoneNumber.length; i++) {
+          let cur = obj[phoneNumber[i]]
+          combos = buildCombos(combos, cur)
+      }
+    return combos;
+  }
+  
+  function buildCombos(combos, letters) {
+      if (!combos.length) return letters.split('')
+      let arr = [];
+      for (let i = 0; i < combos.length; i++) {
+          for (let j = 0; j < letters.length; j++) {
+              arr.push(combos[i] + letters[j])
+          }
+      }
+      return arr;
+  }
