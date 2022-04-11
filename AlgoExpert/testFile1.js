@@ -917,13 +917,52 @@ class Node {
     //store node names into the input array
     breadthFirstSearch(array) {
     // Write your code here.
-            let queue = [this];
-            while (queue.length) {
-                let currentNode = queue.shift();
-                array.push(currentNode.name);
-                queue = queue.concat(currentNode.children)
-            }
-            return array
+        let queue = [this];
+        while (queue.length) {
+            let currentNode = queue.shift();
+            array.push(currentNode.name);
+            queue = queue.concat(currentNode.children)
+        }
+        return array
     }
 }
+
+class AncestralTree {
+    constructor(name) {
+      this.name = name;
+      this.ancestor = null;
+    }
+  }
   
+function getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo) {
+// Write your code here.
+    let dOne = getDepth(topAncestor, descendantOne);
+    let dTwo = getDepth(topAncestor, descendantTwo);
+    if (dOne > dTwo) {
+        return youngestAnc(descendantOne, descendantTwo, dOne - dTwo)
+    } else {
+        return youngestAnc(descendantTwo, descendantOne, dTwo - dOne)
+    }
+}
+
+function youngestAnc(descOne, descTwo, dif) {
+    while (dif) {
+        descOne = descOne.ancestor //make each node on the same level
+        dif--;
+    }
+    while(descOne !== descTwo) {
+        descOne = descOne.ancestor;
+        descTwo = descTwo.ancestor;
+    }
+    return descOne;
+}
+
+function getDepth(topAnc, node) {
+    let depth = 0;
+    let curNode = node;
+    while(curNode) {
+        curNode = curNode.ancestor;
+        depth++;
+    }
+    return depth;
+}
