@@ -966,3 +966,20 @@ function getDepth(topAnc, node) {
     }
     return depth;
 }
+
+function taskAssignment(k, tasks) {
+    // Write your code here.
+    let arr = [];
+    let res = [];
+    for (let i = 0; i < tasks.length; i++) {
+        arr.push([tasks[i], i])
+    }
+    arr.sort((a, b) => a[0] - b[0]);
+    let [i, j] = [0, arr.length - 1];
+    while (i < j) {
+        res.push([arr[i][1], arr[j][1]])
+        i++;
+        j--;
+    }
+return res;
+}
