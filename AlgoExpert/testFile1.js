@@ -747,58 +747,58 @@ function threeNumberSort(array, order) {
     return newArr;
 }
 
-class Node {
-    constructor(name) {
-      this.name = name;
-      this.children = [];
-    }
+// class Node {
+//     constructor(name) {
+//       this.name = name;
+//       this.children = [];
+//     }
   
-    addChild(name) {
-      this.children.push(new Node(name));
-      return this;
-    }
+//     addChild(name) {
+//       this.children.push(new Node(name));
+//       return this;
+//     }
   
-      //store node names into the input array
-    breadthFirstSearch(array) {
-      // Write your code here.
-        let queue = [this];
-        while (queue.length) {
-            let currentNode = queue.shift();
-            array.push(currentNode.name);
-            queue = queue.concat(currentNode.children)
-        }
-        return array
-    }
-}
+//       //store node names into the input array
+//     breadthFirstSearch(array) {
+//       // Write your code here.
+//         let queue = [this];
+//         while (queue.length) {
+//             let currentNode = queue.shift();
+//             array.push(currentNode.name);
+//             queue = queue.concat(currentNode.children)
+//         }
+//         return array
+//     }
+// }
 
-function quickSort(array) {
-    // Write your code here.
-    if (array.length <= 1) return array
-    let pivot = array[0]
-    let left = quickSort(array.slice(1).filter(ele => ele <= pivot));
-    let right = quickSort(array.slice(1).filter(ele => ele > pivot));
+// function quickSort(array) {
+//     // Write your code here.
+//     if (array.length <= 1) return array
+//     let pivot = array[0]
+//     let left = quickSort(array.slice(1).filter(ele => ele <= pivot));
+//     let right = quickSort(array.slice(1).filter(ele => ele > pivot));
     
-    return left.concat([pivot]).concat(right)
-}
+//     return left.concat([pivot]).concat(right)
+// }
 
-function groupAnagrams(words) {
-    // Write your code here.
-    let obj = {};
-    let arr = [];
-    for (let i = 0; i < words.length; i++) {
-        let sortedWord = words[i].split('').sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0))
-        if (obj[sortedWord]) {
-            obj[sortedWord].push(words[i])
-        } else {
-            obj[sortedWord] = [words[i]]
-        }
-    }
-    for (let key in obj) {
-        arr.push(obj[key])
-    }
+// function groupAnagrams(words) {
+//     // Write your code here.
+//     let obj = {};
+//     let arr = [];
+//     for (let i = 0; i < words.length; i++) {
+//         let sortedWord = words[i].split('').sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0))
+//         if (obj[sortedWord]) {
+//             obj[sortedWord].push(words[i])
+//         } else {
+//             obj[sortedWord] = [words[i]]
+//         }
+//     }
+//     for (let key in obj) {
+//         arr.push(obj[key])
+//     }
     
-    return arr;
-}
+//     return arr;
+// }
 
 function firstDuplicateValue(array) {
     // Write your code here.
@@ -983,3 +983,139 @@ function taskAssignment(k, tasks) {
     }
 return res;
 }
+
+//each individual node needs to be traversed and checked for all possible words
+//to make it more efficient I could throw the words into a trie and traverse
+//that trie as I check neighbors
+//if any neighbor breaks that trie then I no longer need to check that path
+function boggleBoard(board, words) {
+    // Write your code here.
+    let newGrid = [];
+    for (let i = 0; i < board.length; i++) {
+        let inner = [];
+        for (let j = 0; j < board[i].length; j++) {
+            let node = new gridNode(board[i][j]);
+            node.coordinates = [i, j];
+            inner.push(node);
+        }
+        newGrid.push(inner);
+    }
+    //newGrid is properly set up
+    for (let i = 0; i < newGrid.length; i++) {
+        for (let j = 0; j < newGrid[i].length; j++) {
+            setUpNeighbors(newGrid[i][j], newGrid)
+        }
+    }
+    console.log(newGrid)
+    //trie tree properly set up
+    let root = new trieNode(null);
+    for (let word of words) {
+        add(word, 0, root)
+    }
+    //now return all of the words that reach a .complete when traversing 
+    //through the nodes and their neighbors
+    let foundWords = [];
+    for (let i = 0; i < newGrid.length; i++) {
+        for (let j = 0; j < newGrid[i].length; j++) {
+            //each node needs to be checked for all words that can be found
+            // console.log(newGrid[i][j].coordinates)
+            // console.log(newGrid[i][j].neighbors)
+            foundWords.concat(findWords(newGrid[i][j], root))
+        }
+    }
+    
+    return foundWords;
+}
+
+function findWords(node, root) {
+    let words = []
+    if (!root.children[node.char]) return [];
+    let queue = [[node, root.children[node.char]]];
+    while (queue.length) {
+        let [currentNode, trieNode] = queue.shift();
+        // console.log(currentNode)
+        // console.log(trieNode)
+        for (let n of currentNode.neighbors) {
+            // console.log('neighbor')
+            // console.log(n[0])
+            if (trieNode.children[n.char]) {
+                queue.push([n, trieNode.children[n]])
+            }
+        }
+        if (currentNode.complete) {
+            words.push(currentNode.word)
+        }
+    }
+    // console.log(words)
+    return words;
+}
+
+function gridNode(char) {
+    this.char = char;
+    this.neighbors = [];
+    this.coordinates = null;
+}
+function setUpNeighbors(gridNode, grid) {
+    // console.log(`grid size = ${[grid.length, grid[0].length]}`);
+    // console.log(`node coordinates = ${gridNode.coordinates}`)
+    let check = [
+        [1, 1],
+        [1, 0],
+        [1, -1],
+        [0, 1],
+        [0, -1],
+        [-1, 1],
+        [-1, 0],
+        [-1, -1]
+    ]
+    let curI = gridNode.coordinates[0]
+    let curJ = gridNode.coordinates[1]
+    for (let i = 0; i < check.length; i++) {
+        let checkI = check[i][0] + curI;
+        let checkJ = check[i][1] + curJ;
+        if (checkI >= 0 && checkI < grid.length && checkJ >= 0 && checkJ < grid[0].length) {
+            // console.log(grid[checkI, checkJ])
+            gridNode.neighbors.push(grid[checkI, checkJ])
+        }
+    }
+}
+
+function trieNode(char) {
+    this.char = char
+    this.children = {};
+    this.parent = null;
+    this.complete = false;
+    this.word = '';
+}
+
+function add(str, i, root) {
+    if (i === str.length) {
+        root.complete = true;
+        return
+    }
+    if (!root.children[str[i]]) {
+        root.children[str[i]] = new trieNode(str[i])
+        root.children[str[i]].parent = root;
+    }
+    root.word = str;
+    add(str, i + 1, root.children[str[i]]);
+}
+
+let board = [
+["t", "h", "i", "s", "i", "s", "a"],
+["s", "i", "m", "p", "l", "e", "x"],
+["b", "x", "x", "x", "x", "e", "b"],
+["x", "o", "g", "g", "l", "x", "o"],
+["x", "x", "x", "D", "T", "r", "a"],
+["R", "E", "P", "E", "A", "d", "x"],
+["x", "x", "x", "x", "x", "x", "x"],
+["N", "O", "T", "R", "E", "-", "P"],
+["x", "x", "D", "E", "T", "A", "E"],
+]
+ 
+let words = [
+"this", "is", "not", "a", "simple", "boggle",
+"board", "test", "REPEATED", "NOTRE-PEATED",
+]
+
+boggleBoard(board, words)
