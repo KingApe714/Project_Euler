@@ -1152,5 +1152,16 @@ function reconstructBst(preOrderTraversalValues) {
             }
         }
     }
-return root;
+    return root;
+}
+
+function kadanesAlgorithm(array) {
+    // Write your code here.
+    let current = array[0];
+    let max = array[0]
+    for (let i = 1; i < array.length; i++) {
+        current = Math.max(array[i], current + array[i])
+        max = Math.max(max, current)
+    }
+    return max;
 }
