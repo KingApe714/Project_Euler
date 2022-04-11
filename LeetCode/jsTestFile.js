@@ -151,3 +151,19 @@ var addTwoNumbers = function(l1, l2) {
     
     return newList;
 };
+
+var subsets = function(nums) {
+    let subs = [];
+    let queue = [[], [nums[0]]];
+    for (let i = 1; i < nums.length; i++) {
+        let tempSubs = [];
+        let ele = nums[i];
+        console.log(queue)
+        for (let j = 0; j < queue.length; j++) {
+            tempSubs.push(queue[j])
+            tempSubs.push(queue[j].concat([nums[i]]))
+        }
+        queue = tempSubs;
+    }
+    return queue
+};
