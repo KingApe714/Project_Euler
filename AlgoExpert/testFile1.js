@@ -1165,3 +1165,33 @@ function kadanesAlgorithm(array) {
     }
     return max;
 }
+
+function minimumCharactersForWords(words) {
+    // Write your code here.
+    let obj = {};
+    for (let word of words) {
+        let wordObj = {};
+        for (let i = 0; i < word.length; i++) {
+            let chr = word[i];
+            if (wordObj[chr]) {
+                wordObj[chr]++;
+            } else {
+                wordObj[chr] = 1;
+            }
+        }
+        for (let key in wordObj) {
+            if (obj[key] && wordObj[key] > obj[key]) {
+                obj[key] = wordObj[key]
+            } else if (!obj[key]) {
+                obj[key] = wordObj[key]
+            }
+        }
+    }
+    let arr = []
+    for (let key in obj) {
+        for (let i = 1; i <= obj[key]; i++) {
+            arr.push(key)
+        }
+    }
+return arr;
+}
