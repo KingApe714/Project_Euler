@@ -1033,20 +1033,20 @@ function findWords(node, root) {
     let queue = [[node, root.children[node.char]]];
     while (queue.length) {
         let [currentNode, trieNode] = queue.shift();
-        // console.log(currentNode)
+        console.log(currentNode.neighbors)
         // console.log(trieNode)
         for (let n of currentNode.neighbors) {
             // console.log('neighbor')
             // console.log(n[0])
-            if (trieNode.children[n.char]) {
-                queue.push([n, trieNode.children[n]])
+            if (trieNode.children[n[0].char]) {
+                queue.push([n[0], trieNode.children[n[0].char]])
             }
         }
         if (currentNode.complete) {
             words.push(currentNode.word)
         }
     }
-    // console.log(words)
+    console.log(words)
     return words;
 }
 
@@ -1119,3 +1119,38 @@ let words = [
 ]
 
 boggleBoard(board, words)
+
+class BST {
+    constructor(value, left = null, right = null) {
+        this.value = value;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+function reconstructBst(preOrderTraversalValues) {
+// Write your code here.
+    let root = new BST(preOrderTraversalValues[0]);
+    for (let i = 1; i < preOrderTraversalValues.length; i++) {
+        let currentNode = root;
+        let val = preOrderTraversalValues[i];
+        while (true) {
+            if (val < currentNode.value) {
+                if (currentNode.left) { //meaning that there's a value there
+                    currentNode = currentNode.left;
+                } else { //no value, so set val and break
+                    currentNode.left = new BST(val);
+                    break;
+                }
+            } else {
+                if (currentNode.right) { //meaning that there's a value there
+                    currentNode = currentNode.right;
+                } else { //no value, so set val and break
+                    currentNode.right = new BST(val);
+                    break;
+                }
+            }
+        }
+    }
+return root;
+}
