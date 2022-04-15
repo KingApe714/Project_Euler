@@ -1195,3 +1195,46 @@ function minimumCharactersForWords(words) {
     }
 return arr;
 }
+
+function heapSort(array) {
+    // Write your code here.
+    buildMaxHeap(array);
+    for (let i = array.length - 1; i > 0; i--) {
+        swap(0, i, array);
+        siftDown(0, i - 1, array);
+    }
+    return array
+}
+
+function buildMaxHeap(array) {
+    let parentIdx = Math.floor((array.length - 2) / 2);
+    for (let i = parentIdx; i >= 0; i--) {
+        siftDown(i, array.length - 1, array);
+    }
+}
+
+function siftDown(idx, endIdx, heap) {
+    let childOneIdx = idx * 2 + 1;
+    while (childOneIdx <= endIdx) {
+        let childTwoIdx = idx * 2 + 2 <= endIdx ? idx * 2 + 2 : -1;
+        let idxToSwap;
+        if (childTwoIdx !== -1 && heap[childTwoIdx] > heap[childOneIdx]) {
+            idxToSwap = childTwoIdx;
+        } else {
+            idxToSwap = childOneIdx;
+        }
+        if (heap[idxToSwap] > heap[idx]) {
+            swap(idx, idxToSwap, heap);
+            idx = idxToSwap;
+            childOneIdx = idx * 2 + 1;
+        } else {
+            return;
+        }
+    }
+}
+
+function swap(i, j, array) {
+    let temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+}
