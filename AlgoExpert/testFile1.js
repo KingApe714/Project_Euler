@@ -1327,3 +1327,29 @@ class MinMaxStack {
 		return this.minMaxStack[this.minMaxStack.length - 1].max;
   }
 }
+
+function balancedBrackets(string) {
+    // Write your code here.
+      let stack = [];
+      for (let i = 0; i < string.length; i++) {
+          if (string[i] === '[' || string[i] === '{' || string[i] === '(') {
+              stack.push(string[i])
+              continue;
+          }
+          // if (stack.length) {
+          if (stack[stack.length - 1] === '[' && string[i] === ']' ||
+               stack[stack.length - 1] === '{' && string[i] === '}' ||
+               stack[stack.length - 1] === '(' && string[i] === ')'){
+              stack.pop()
+              continue;
+          }
+          if (string[i] === ']' && stack[stack.length - 1] !== '[' ||
+               string[i] === '}' && stack[stack.length - 1] !== '{' ||
+               string[i] === ')' && stack[stack.length - 1] !== '(') {
+              return false;
+          }
+          // }
+      }
+      
+      return stack.length === 0;
+  }
