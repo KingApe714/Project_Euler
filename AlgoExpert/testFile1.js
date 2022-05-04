@@ -1278,3 +1278,52 @@ function doesMatch(string, substring, pattern) {
     }
     return false;
 }
+
+class MinMaxStack {
+	//initialize MinMax stack
+	constructor() {
+		this.stack = [];
+		this.minMaxStack = []; //this is an array of objects
+	}
+	
+  peek() {
+    //return last element in stack
+		return this.stack[this.stack.length - 1]
+  }
+
+  pop() {
+		//return and destroy last element in both stacks.
+		this.minMaxStack.pop()
+		return this.stack.pop();
+  }
+
+  push(number) {
+    //append new value to stack. append new min/max to MinMaxStack
+		this.stack.push(number);
+		if (this.minMaxStack.length) {
+			let newMinMaxEle = {
+				min: Math.min(this.minMaxStack[this.minMaxStack.length - 1].min, number),
+				max: Math.max(this.minMaxStack[this.minMaxStack.length - 1].max, number)
+			}
+			this.minMaxStack.push(newMinMaxEle);
+		} else {
+			this.minMaxStack.push({
+				min: number,
+				max: number
+			})
+		}
+		
+		console.log(this.stack)
+		console.log(this.minMaxStack)
+  }
+
+  getMin() {
+    // return Min from last element of MinMax stack.
+		return this.minMaxStack[this.minMaxStack.length - 1].min;
+  }
+
+  getMax() {
+    // return Max from last element of MinMax stack.
+		return this.minMaxStack[this.minMaxStack.length - 1].max;
+  }
+}
