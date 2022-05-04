@@ -1353,3 +1353,28 @@ function balancedBrackets(string) {
       
       return stack.length === 0;
   }
+
+  function sunsetViews(buildings, direction) {
+    // Write your code here.
+      if (!buildings.length) return []
+      let output = [];
+      if (direction === 'WEST') {
+          //iterate forward
+          output.push(0)
+          for (let i = 1; i < buildings.length; i++) {
+              if (buildings[i] > buildings[output[output.length - 1]]) {
+                  output.push(i)
+              }
+          }
+      } else {
+          //iterate backward
+          output.push(buildings.length - 1)
+          for (let i = buildings.length - 2; i >= 0; i--) {
+              if (buildings[i] > buildings[output[output.length - 1]]) {
+                  output.push(i)
+              }
+          }
+      }
+      
+    return direction === "EAST" ? output.reverse() : output;
+  }
