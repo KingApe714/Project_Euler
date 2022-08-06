@@ -63,6 +63,20 @@ const merge = (left, right) => {
     return merged.concat(left, right);
 }
 
+//the quickSort algorithm uses a similar methodology as mergeSort in dividing and conquering however it tends to be slightly more efficient
+//by taking the pivot we don't have to look at one element on every recursive call making it slightly quicker.
+//it filters the elements less than the pivot to a left array and filters the elements greater than the pivot in a right array
+//quickSort is called on both left and right until we reach the base case of an array length 0 or 1
+//finally we concatinate the left, the pivot and the right then return
+
+const quickSort = array => {
+    if (array.length < 2) return array;
+    let pivot = array.pop()
+    let left = quickSort(array.filter(ele => ele < pivot));
+    let right = quickSort(array.filter(ele => ele >= pivot))
+    return left.concat([pivot], right)
+}
+
 let arr1 = [8, 5, 2, 9, 5, 6, 3]
 let arr2 = [1]
 let arr3 = [1, 2]
@@ -70,9 +84,9 @@ let arr4 = [2, 1]
 let arr5 = [-4, 5, 10, 8, -10, -6, -4, -2, -5, 3, 5, -4, -5, -1, 1, 6, -7, -6, -7, 8]
 let arr6 = [-7, 2, 3, 8, -10, 4, -6, -10, -2, -7, 10, 5, 2, 9, -9, -5, 3, 8]
 
-console.log(mergeSort(arr1))
-console.log(mergeSort(arr2))
-console.log(mergeSort(arr3))
-console.log(mergeSort(arr4))
-console.log(mergeSort(arr5))
-console.log(mergeSort(arr6))
+console.log(quickSort(arr1))
+console.log(quickSort(arr2))
+console.log(quickSort(arr3))
+console.log(quickSort(arr4))
+console.log(quickSort(arr5))
+console.log(quickSort(arr6))
