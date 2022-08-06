@@ -43,6 +43,26 @@ const insertionSort = array => {
 //The time complexity is O(nlog(n))
 //The space complexity is O(n)
 
+const mergeSort = array => {
+    if (array.length < 2) return array;
+    let mid = Math.floor(array.length / 2);
+    let left = mergeSort(array.slice(0, mid));
+    let right = mergeSort(array.slice(mid));
+    return merge(left, right);
+}
+
+const merge = (left, right) => {
+    let merged = [];
+    while (left.length && right.length) {
+        if (left[0] < right[0]) {
+            merged.push(left.shift())
+        } else {
+            merged.push(right.shift())
+        }
+    }
+    return merged.concat(left, right);
+}
+
 let arr1 = [8, 5, 2, 9, 5, 6, 3]
 let arr2 = [1]
 let arr3 = [1, 2]
@@ -50,9 +70,9 @@ let arr4 = [2, 1]
 let arr5 = [-4, 5, 10, 8, -10, -6, -4, -2, -5, 3, 5, -4, -5, -1, 1, 6, -7, -6, -7, 8]
 let arr6 = [-7, 2, 3, 8, -10, 4, -6, -10, -2, -7, 10, 5, 2, 9, -9, -5, 3, 8]
 
-console.log(insertionSort(arr1))
-console.log(insertionSort(arr2))
-console.log(insertionSort(arr3))
-console.log(insertionSort(arr4))
-console.log(insertionSort(arr5))
-console.log(insertionSort(arr6))
+console.log(mergeSort(arr1))
+console.log(mergeSort(arr2))
+console.log(mergeSort(arr3))
+console.log(mergeSort(arr4))
+console.log(mergeSort(arr5))
+console.log(mergeSort(arr6))
