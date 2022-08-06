@@ -37,6 +37,12 @@ const insertionSort = array => {
     return array;
 }
 
+//the merge sort algorithm uses the divided and conquer method where the array is cut down to smaller arrays of length 0 or 1
+//once we've reached the smallest possible array lengths on both the left and right arrays we then merge them together in a separate
+//function
+//The time complexity is O(nlog(n))
+//The space complexity is O(n)
+
 let arr1 = [8, 5, 2, 9, 5, 6, 3]
 let arr2 = [1]
 let arr3 = [1, 2]
