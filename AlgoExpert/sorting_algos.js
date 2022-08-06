@@ -1,3 +1,23 @@
+//the Bubble Sorting algorithm uses a sliding window to sort an array.
+//it will keep looping from the begining of an array swapping adjacent elements that are out of place until the entire array is sorted
+//because of the sliding window it runs in O(n^2) time
+//because it sorts the array in place it runs in O(1) space
+
+const bubbleSort = array => {
+    let sorted = false;
+    while (!sorted) {
+        sorted = true;
+        for (let i = 0; i < array.length - 1; i++) {
+            if (array[i] > array[i + 1]) {
+                [array[i], array[i + 1]] = [array[i + 1], array[i]]
+                sorted = false;
+            }
+        }
+    }
+
+    return array;
+}
+
 //The selection sorting algorithm uses a sliding window method where the left side of the array is sorted and the right is unsorted
 //The algo sorts the array in place
 //because of the sliding window it runs in O(n^2) time
@@ -84,9 +104,9 @@ let arr4 = [2, 1]
 let arr5 = [-4, 5, 10, 8, -10, -6, -4, -2, -5, 3, 5, -4, -5, -1, 1, 6, -7, -6, -7, 8]
 let arr6 = [-7, 2, 3, 8, -10, 4, -6, -10, -2, -7, 10, 5, 2, 9, -9, -5, 3, 8]
 
-console.log(quickSort(arr1))
-console.log(quickSort(arr2))
-console.log(quickSort(arr3))
-console.log(quickSort(arr4))
-console.log(quickSort(arr5))
-console.log(quickSort(arr6))
+console.log(bubbleSort(arr1))
+console.log(bubbleSort(arr2))
+console.log(bubbleSort(arr3))
+console.log(bubbleSort(arr4))
+console.log(bubbleSort(arr5))
+console.log(bubbleSort(arr6))
