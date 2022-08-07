@@ -107,6 +107,13 @@ const quickSort = array => {
 //I then loop through the array that is being passed in and look at that numbers at the specified column and place them where the countsArr
 //specifies. Every time I hit any element at any index I then decriment that element by 1 which tells me that the next time I have a column
 //referencing that element it will direct me to the index in front of the last one
+
+//remember that this solution does not account for negative numbers
+//the time complexity is O(d * (n + b))
+//the space complexity is O(n + b)
+//where n is the length of the input array
+//d is the amount of digits
+//and b is the base that we are in (usually 10)
 const radixSort = array => {
     //if the array is empty simply return the array because it is implicitly sorted
     if (array.length === 0) return array;
@@ -118,8 +125,9 @@ const radixSort = array => {
     //0 of course will give me 1 which is the ones position (or column)
     let digit = 0;
 
-    console.log(maxNumber / 10 ** digit)
+    // console.log(maxNumber / 10 ** digit)
     //keep looping while the highest number is greater than 0, otherwise there are no other digits for us to look at
+    //the exponent will compute first then the division takes place
     while (maxNumber / 10 ** digit > 0) {
         countingSort(array, digit)
         digit++;
@@ -129,7 +137,6 @@ const radixSort = array => {
 }
 
 const countingSort = (array, digit) => {
-    console.log(`here is the array being passed into the countingSort func = ${array}`)
     //initialize the sortedArray to the size of the array with all 0s as elements
     let sortedArray = new Array(array.length).fill(0);
     //initialize the countArray to the base that we are in (most likely 10) and fill with 0s
@@ -162,10 +169,12 @@ const countingSort = (array, digit) => {
         sortedArray[sortedIdx] = array[i];
     }
 
-    //Finally loop through the input array and swap the elements according to their new indices in the sortedArray
-    for (let i = 0; i < array.length; i++) {
-        array[i] = sortedArray[i];
-    }
+    //Finally loop through the input array and set the elements equal to the elements in the sortedArray
+    // for (let i = 0; i < array.length; i++) {
+    //     array[i] = sortedArray[i];
+    // }
+    array.map((ele, i, arr) => arr[i] = sortedArray[i])
+    // array = sortedArray.slice();
 }
 
 let arr1 = [8, 5, 2, 9, 5, 6, 3]
