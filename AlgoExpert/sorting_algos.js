@@ -97,6 +97,34 @@ const quickSort = array => {
     return left.concat([pivot], right)
 }
 
+//Most of the work in the Radix Sorting Algorithm is done for me by the countingSort algorithm. The countingSort container two arrays
+//and a variable that I need to use to determine which comlumn I am working in. The sortedArray needs to be initialized to an array
+//that is the same length as the array that is being passed in and filled with 0s. The countsArray needs to be initialized as an array
+//of length 10 and filled with 0s. I use the digitColumn number to determine which digit I want to look at in the element. I then count 
+//how many times that number appears in the array at that particular column and throw the count at that digits respective index in the 
+//countArr. i then need to loop through countArr and add adjacent elements whcih will later tell me the index that i need to see the
+//elements that are referencing them. 
+//I then loop through the array that is being passed in and look at that numbers at the specified column and place them where the countsArr
+//specifies. Every time I hit any element at any index I then decriment that element by 1 which tells me that the next time I have a column
+//referencing that element it will direct me to the index in front of the last one
+const radixSort = array => {
+    //if the array is empty simply return the array because it is implicitly sorted
+    if (array.length === 0) return array;
+
+    //I need to grab the highest number becuase this will help me determine how many times the while loop must loop
+    let maxNumber = Math.max(...array);
+
+    //Initializing the digit to 0 tells me which digit I should be working with by simply raising 10 to the power of the digit
+    //0 of course will give me 1 which is the ones position (or column)
+    let digit = 0;
+
+    console.log(maxNumber / 10 ** digit)
+    //keep looping while the highest number is greater than 0, otherwise there are no other digits for us to look at
+    while (maxNumber / 10 ** digit > 0) {
+
+    }
+}
+
 let arr1 = [8, 5, 2, 9, 5, 6, 3]
 let arr2 = [1]
 let arr3 = [1, 2]
@@ -104,9 +132,9 @@ let arr4 = [2, 1]
 let arr5 = [-4, 5, 10, 8, -10, -6, -4, -2, -5, 3, 5, -4, -5, -1, 1, 6, -7, -6, -7, 8]
 let arr6 = [-7, 2, 3, 8, -10, 4, -6, -10, -2, -7, 10, 5, 2, 9, -9, -5, 3, 8]
 
-console.log(bubbleSort(arr1))
-console.log(bubbleSort(arr2))
-console.log(bubbleSort(arr3))
-console.log(bubbleSort(arr4))
-console.log(bubbleSort(arr5))
-console.log(bubbleSort(arr6))
+// console.log(bubbleSort(arr1))
+// console.log(bubbleSort(arr2))
+// console.log(bubbleSort(arr3))
+// console.log(bubbleSort(arr4))
+// console.log(bubbleSort(arr5))
+// console.log(bubbleSort(arr6))
