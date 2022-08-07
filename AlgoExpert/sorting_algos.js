@@ -121,7 +121,50 @@ const radixSort = array => {
     console.log(maxNumber / 10 ** digit)
     //keep looping while the highest number is greater than 0, otherwise there are no other digits for us to look at
     while (maxNumber / 10 ** digit > 0) {
+        countingSort(array, digit)
+        digit++;
+    }
 
+    return array;
+}
+
+const countingSort = (array, digit) => {
+    console.log(`here is the array being passed into the countingSort func = ${array}`)
+    //initialize the sortedArray to the size of the array with all 0s as elements
+    let sortedArray = new Array(array.length).fill(0);
+    //initialize the countArray to the base that we are in (most likely 10) and fill with 0s
+    let countArray = new Array(10).fill(0);
+    //initialize the digitColumn to the digit being passed in multiplied by 10
+    let digitColumn = 10 ** digit;
+
+    //Now there is four total loops that I need to work with in order to make this work
+
+    //This first loop will start counting the amount of times a particular digit appears
+    for (let num of array) {
+        let countIdx = Math.floor(num / digitColumn) % 10;
+        countArray[countIdx]++;
+    }
+
+    //This loop adds adjacent elements which will later serve as an index indicator telling us where the current ele should go in the array
+    //looping from 1 to 9 because the countArray is length 10
+    for (let i = 1; i < 10; i++) {
+        countArray[i] += countArray[i - 1];
+    } 
+
+    //This array loops backward through the array being passed in and grabs the digit in the specified column
+    for (let i = array.length - 1; i >= 0; i--) {
+        //grabs the particular digit that indicates the index to grab from in the the countArray
+        let countIdx = Math.floor(array[i] / digitColumn) % 10
+        //decriment what ever value exists in the countArray at the countIdx
+        countArray[countIdx]--;
+        //now grab the index sitting in countArray at countIdx
+        let sortedIdx = countArray[countIdx];
+        sortedArray[sortedIdx] = array[i];
+    }
+
+    //Finally loop through the input array and swap the elements according to their new indices in the sortedArray
+    for (let i = 0; i < array.length; i++) {
+        array[i] = sortedArray[i];
     }
 }
 
@@ -132,9 +175,9 @@ let arr4 = [2, 1]
 let arr5 = [-4, 5, 10, 8, -10, -6, -4, -2, -5, 3, 5, -4, -5, -1, 1, 6, -7, -6, -7, 8]
 let arr6 = [-7, 2, 3, 8, -10, 4, -6, -10, -2, -7, 10, 5, 2, 9, -9, -5, 3, 8]
 
-// console.log(bubbleSort(arr1))
-// console.log(bubbleSort(arr2))
-// console.log(bubbleSort(arr3))
-// console.log(bubbleSort(arr4))
-// console.log(bubbleSort(arr5))
-// console.log(bubbleSort(arr6))
+console.log(radixSort(arr1))
+console.log(radixSort(arr2))
+console.log(radixSort(arr3))
+console.log(radixSort(arr4))
+console.log(radixSort(arr5))
+console.log(radixSort(arr6))
