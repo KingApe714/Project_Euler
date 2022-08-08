@@ -122,7 +122,7 @@ const radixSort = array => {
     let maxNumber = Math.max(...array);
 
     //lets set up a for loop and init a digit variable that will keep increasing until we've passed the amount of digits in maxNumber
-    for (let digit = 0; maxNumber / 10 ** digit > 0; digit++) {
+    for (let digit = 0; 10 ** digit <= maxNumber; digit++) {
         countingSort(array, digit)
     }
 
