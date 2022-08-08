@@ -121,16 +121,9 @@ const radixSort = array => {
     //I need to grab the highest number becuase this will help me determine how many times the while loop must loop
     let maxNumber = Math.max(...array);
 
-    //Initializing the digit to 0 tells me which digit I should be working with by simply raising 10 to the power of the digit
-    //0 of course will give me 1 which is the ones position (or column)
-    let digit = 0;
-
-    // console.log(maxNumber / 10 ** digit)
-    //keep looping while the highest number is greater than 0, otherwise there are no other digits for us to look at
-    //the exponent will compute first then the division takes place
-    while (maxNumber / 10 ** digit > 0) {
+    //lets set up a for loop and init a digit variable that will keep increasing until we've passed the amount of digits in maxNumber
+    for (let digit = 0; maxNumber / 10 ** digit > 0; digit++) {
         countingSort(array, digit)
-        digit++;
     }
 
     return array;
