@@ -134,7 +134,7 @@ const countingSort = (array, digit) => {
     let sortedArray = new Array(array.length).fill(0);
     //initialize the countArray to the base that we are in (most likely 10) and fill with 0s
     let countArray = new Array(10).fill(0);
-    //initialize the digitColumn to the digit being passed in multiplied by 10
+    //initialize the digitColumn to 10 to the power of the digit
     let digitColumn = 10 ** digit;
 
     //Now there is four total loops that I need to work with in order to make this work
