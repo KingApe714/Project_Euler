@@ -141,6 +141,8 @@ const countingSort = (array, digit) => {
 
     //This first loop will start counting the amount of times a particular digit appears
     for (let num of array) {
+        //dividing num by the digitColumn shops off everything right of the column that I want to look at
+        //modding that by ten chops off everying to the left of the column that I wanna look at
         let countIdx = Math.floor(num / digitColumn) % 10;
         countArray[countIdx]++;
     }
