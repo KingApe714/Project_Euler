@@ -36,3 +36,10 @@
 
 //Space complexity
 //because everything happens in place it runs in O(1) space
+
+//focus on writing the swap method first
+//then the sift up method
+//then the sift down method
+//then the insert method
+//then the delete method
+//then the build heap methos
