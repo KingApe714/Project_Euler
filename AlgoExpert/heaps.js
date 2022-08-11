@@ -42,4 +42,4 @@
 //then the sift down method
 //then the insert method
 //then the delete method
-//then the build heap methos
+//then the build heap method
