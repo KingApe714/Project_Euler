@@ -98,3 +98,14 @@ const pairSum = (numbers, targetSum) => {
         
     }
 };
+
+const pairProduct = (numbers, targetProduct) => {
+    // todo
+    let obj = {};
+    for (let i = 0; i < numbers.length; i++) {
+        let num = numbers[i];
+        let checkNum = targetProduct / num;
+        if (checkNum in obj) return [obj[checkNum], i];
+        if (!(num in obj)) obj[num] = i;
+    }
+};
