@@ -182,3 +182,15 @@ const fiveSort = (nums) => {
 
     return nums
 };
+
+const linkedListValues = (head) => {
+    let arr = [];
+    
+    let current = head;
+    while (current) {
+      arr.push(current.val);
+      current = current.next;
+    }
+    
+    return arr;
+};
