@@ -109,3 +109,37 @@ const pairProduct = (numbers, targetProduct) => {
         if (!(num in obj)) obj[num] = i;
     }
 };
+
+const intersection = (a, b) => {
+    // todo
+    let arr = [];
+    // for (let i = 0; i < a.length; i++) {
+    //   let num1 = a[i];
+    //   if (b.includes(num1)) arr.push(num1)
+    // } this solution is too slow
+    // a.sort((a, b) => a - b)
+    // b.sort((a, b) => a - b)
+    // let i = 0;
+    // let j = 0;
+    // console.log(a)
+    // while (i < a.length && j < b.length) {
+    //   // console.log(j)
+    //   if (a[i] === b[j]) {
+    //     arr.push(a[i]);
+    //     i++;
+    //     j++;
+    //   } else if (a[i] < b[j]) {
+    //     i++;
+    //   } else {
+    //     j++
+    //   }
+    // } //this is an O(nlon(n) + mlog(m)) solution
+    let setA = new Set(a) //just passing in the array automatically makes the set for you
+    for (let ele of b) {
+        if (setA.has(ele)) {
+        arr.push(ele)
+        }
+    } //this is an O(n + m) solution
+
+    return arr;
+};
