@@ -38,3 +38,28 @@ const uncompress = (s) => {
     
     return str;
   };
+
+  const anagrams = (s1, s2) => {
+    // todo
+    if (s1.length !== s2.length) return false;
+    let obj = {};
+    for (let i = 0; i < s1.length; i++) {
+      let chr1 = s1[i];
+      if (!(chr1 in obj)) {
+        obj[chr1] = 0;
+      }
+      obj[chr1]++;
+      
+      let chr2 = s2[i];
+      if (!(chr2 in obj)) {
+        obj[chr2] = 0;
+      }
+      obj[chr2]--;
+    }
+    
+    for (let chr in obj) {
+      if (obj[chr] !== 0) return false;
+    }
+    
+    return true;
+  };
