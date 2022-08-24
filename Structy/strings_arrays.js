@@ -63,3 +63,24 @@ const uncompress = (s) => {
     
     return true;
   };
+
+  const mostFrequentChar = (s) => {
+    // todo
+    let obj = {};
+    for (let i = 0; i < s.length; i++) {
+      if (!(s[i] in obj)) {
+        obj[s[i]] = 0;
+      }
+      obj[s[i]]++;
+    }
+    let max = 0
+    let maxChar = '';
+    for (let key in obj) {
+      if (max < obj[key]) {
+        max = obj[key]
+        maxChar = key;
+      }
+    }
+    
+    return maxChar;
+  };
