@@ -205,3 +205,14 @@ const sumList = (head) => {
 
     return sum;
 };
+
+const linkedListFind = (head, target) => {
+  
+    let current = head;
+    while (current) {
+        if (current.val === target) return true;
+        current = current.next
+    }
+
+    return false;
+};
