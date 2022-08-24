@@ -143,3 +143,42 @@ const intersection = (a, b) => {
 
     return arr;
 };
+
+const fiveSort = (nums) => {
+    // todo
+    //i notice that the very last element got swapped with the first five that I saw
+    //which tells me that I should loop forward through the array and have a j indexer
+    //that decriments every time we see a 5
+    //and then of course we can swap using array destructiuring
+  //   let j = nums.length - 1; //there may be an edge case that I have to look out for
+  //   while (nums[j] === 5) {
+  //     j--;
+  //   }
+  //   for (let i = 0; i < j; i++) { //we want to be sure i and j never collide
+  //     let ele = nums[i];
+  //     if (ele === 5) {
+  //       [nums[i], nums[j]] = [nums[j], nums[i]];
+  //       while (nums[j] === 5) {
+  //         j--;
+  //       }
+  //     }
+  //   }
+    
+  //   return nums
+    
+    let j = nums.length - 1;
+    let i = 0;
+    while (i <= j) {
+        if (nums[j] === 5) {
+            j--;
+        } else if (nums[i] === 5) {
+            [nums[i], nums[j]] = [nums[j], nums[i]];
+            i++;
+            j--;
+        } else {
+            i++;
+        }
+    }
+
+    return nums
+};
