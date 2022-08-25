@@ -216,3 +216,17 @@ const linkedListFind = (head, target) => {
 
     return false;
 };
+
+const getNodeValue = (head, index) => {
+    // todo
+  //   let current = head;
+  //   for (let j = 0; j < index && current; j++) {
+  //     current = current.next;
+  //   }
+    
+  //   return current ? current.val : null;
+    
+    if (head === null) return null;
+    if (index === 0) return head.val;
+    return getNodeValue(head.next, index - 1)
+};
