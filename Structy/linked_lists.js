@@ -62,3 +62,32 @@ const reverseList = (head) => {
     
     return prev;
 };
+
+const zipperLists = (head1, head2) => {
+    //So I can use a counter variable that allows me to alternate between odd and even
+    //since I initialize it to 0 I know that I want head2 to be referenced by the even numbers
+    //and head1 to be referenced by the odd numbers.
+    let count = 0
+    //I want to initialize current1 to head1.next since I'm going to initialize the 
+    //return variable to head1;
+    let current1 = head1.next;
+    let current2 = head2;
+    let tail = head1;
+    
+    while (current1 && current2) {
+        if (count % 2 === 0) {
+        tail.next = current2;
+        current2 = current2.next;
+        } else {
+        tail.next = current1;
+        current1 = current1.next;
+        }
+        tail = tail.next;
+        count++;
+    }
+    
+    if (current1) tail.next = current1
+    if (current2) tail.next = current2
+    
+    return head1;
+};
