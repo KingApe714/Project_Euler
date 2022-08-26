@@ -75,18 +75,18 @@ const zipperLists = (head1, head2) => {
     let tail = head1;
     
     while (current1 && current2) {
-        if (count % 2 === 0) {
-        tail.next = current2;
-        current2 = current2.next;
+        if (count % 2 === 0) { //we want to use the even numbers to reference current2 (because 2 is even get it?)
+            tail.next = current2;
+            current2 = current2.next;
         } else {
-        tail.next = current1;
-        current1 = current1.next;
+            tail.next = current1;
+            current1 = current1.next;
         }
         tail = tail.next;
         count++;
     }
     
-    if (current1) tail.next = current1
+    if (current1) tail.next = current1 //we don't have to loop here because current1 is just the remainder of the linkedList
     if (current2) tail.next = current2
     
     return head1;
