@@ -124,3 +124,28 @@ const mergeLists = (head1, head2) => {
     if (current2) tail.next = current2;
     return head1.val < head2.val ? head1 : head2;
 };
+
+//take note of the use of the dummyHead in this case. This makes it so that I don't have to worry about which is the lesser of the 
+//2 becaue I'm going to take advantage of the dummyHead's .next attribute which is what I send at the end. I also need to be sure
+//to set the tail equal to the dummyHead because tail is the one that builds out the whole LinkedList
+const mergeLists2 = (head1, head2) => {
+    let dummyHead = new Node(null);
+    let tail = dummyHead;
+    let current1 = head1;
+    let current2 = head2;
+    while (current1 && current2) {
+        if (current1.val < current2.val) {
+            tail.next = current1;
+            current1 = current1.next;
+        } else {
+            tail.next = current2;
+            current2 = current2.next;
+        }
+        tail = tail.next;
+    }
+
+    if (current1) tail.next = current1;
+    if (current2) tail.next = current2;
+
+    return dummyHead.next;
+};
