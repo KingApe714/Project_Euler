@@ -101,26 +101,26 @@ const mergeLists = (head1, head2) => {
     let current1;
     let current2;
     if (head1.val < head2.val) {
-      tail = head1;
-      current1 = head1.next;
-      current2 = head2;
+        tail = head1;
+        current1 = head1.next;
+        current2 = head2;
     } else {
-      tail = head2;
-      current1 = head1;
-      current2 = head2.next;
+        tail = head2;
+        current1 = head1;
+        current2 = head2.next;
     }
-    
+
     while(current1 && current2) {
-      if (current1.val < current2.val) {
+        if (current1.val < current2.val) {
         tail.next = current1;
         current1 = current1.next;
-      } else {
+        } else {
         tail.next = current2;
         current2 = current2.next;
-      }
-      tail = tail.next;
+        }
+        tail = tail.next;
     }
     if (current1) tail.next = current1;
     if (current2) tail.next = current2;
     return head1.val < head2.val ? head1 : head2;
-  };
+};
