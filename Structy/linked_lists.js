@@ -181,3 +181,4 @@ const longestStreak = (head) => {
 
     return longest;
 };
+
