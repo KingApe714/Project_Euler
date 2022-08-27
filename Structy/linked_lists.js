@@ -149,3 +149,15 @@ const mergeLists2 = (head1, head2) => {
 
     return dummyHead.next;
 };
+
+const isUnivalueList = (head) => {
+    // todo
+    let current = head;
+    
+    while (current) {
+        if (current.val !== head.val) return false;
+        current = current.next;
+    }
+    
+    return true;
+};
