@@ -161,3 +161,23 @@ const isUnivalueList = (head) => {
     
     return true;
 };
+
+const longestStreak = (head) => {
+    // todo
+    if (!head) return 0;
+    let longest = 1;
+    let current = 1;
+    let node = head;
+    while (node) {
+        if (node.next && node.val === node.next.val) {
+        current++;
+        if (current > longest) longest = current;
+        } else {
+        current = 1;
+        }
+        
+        node = node.next;
+    }
+
+    return longest;
+};
