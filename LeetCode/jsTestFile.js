@@ -183,3 +183,25 @@ var search = function(nums, target) {
         return idx === -1 ? -1 : mid + idx + 1;
     }
 };
+
+function heapSort(array) {
+
+}
+
+function buildMaxHeap(array) {
+
+}
+
+function siftDown(idx, endIdx, heap) { //heap is the remainder of the array to be sorted
+    let childOneIdx = idx * 2 + 1;
+    while (childOneIdx <= endIdx) {
+        let childTwoIdx = idx * 2 + 2 ;
+
+    }
+}
+
+function swap(i, j, array) {
+    let temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+}

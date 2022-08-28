@@ -15,7 +15,7 @@ require 'prime'
 
 def conjecture
     arr = []
-    (4_500_001..4_700_000).step(2) do |n|
+    (4_700_001..5_000_000).step(2) do |n|
         unless n.prime?
             arr << n
         end
