@@ -7,6 +7,7 @@ function removeDuplicatesFromLinkedList(linkedList) {
         nextNode = nextNode.next;
         }
 
+        //I'm nore entirely sure why both the current.next and current need to point to the nextNode here
         current.next = nextNode;
         current = nextNode;
     }
