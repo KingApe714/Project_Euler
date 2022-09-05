@@ -198,3 +198,20 @@ const removeNode = (head, targetVal) => {
 
     return head;
 };
+
+const insertNode = (head, value, index) => {
+    let node = new Node(value);
+    if (index === 0) {
+        node.next = head;
+        return node;
+    }
+    let j = 1;
+    let current = head;
+    while (j < index) {
+        j++;
+        current = current.next;
+    }
+    node.next = current.next;
+    current.next = node;
+    return head;
+};
