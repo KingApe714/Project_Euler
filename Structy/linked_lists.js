@@ -215,3 +215,15 @@ const insertNode = (head, value, index) => {
     current.next = node;
     return head;
 };
+
+const createLinkedList = (values) => {
+    if (!values.length) return null;
+    let head = new Node(values.shift())
+    let current = head;
+    while (values.length) {
+        current.next = new Node(values.shift())
+        current = current.next;
+    }
+
+    return head;
+};
