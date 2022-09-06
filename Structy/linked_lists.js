@@ -229,21 +229,25 @@ const createLinkedList = (values) => {
 };
 
 const addLists = (head1, head2) => {
+    let dummy = new Node(null);
     let current1 = head1;
     let current2 = head2;
-    let dummyNode = new Node(null);
-    let current = dummyNode;
+    let tail = dummy;
     let carry = 0;
+    
     while (current1 || current2 || carry) {
-        let val1 = current1 ? current1.val : 0;
-        let val2 = current2 ? current2.val : 0;
-        let sum = val1 + val2 + carry;
-        carry = sum > 9 ? 1 : 0;
-        let digit = sum % 10;
-        current.next = new Node(digit);
-        current = current.next;
-        if (current1) current1 = current1.next;
-        if (current2) current2 = current2.next;
+      let val1 = current1 ? current1.val : 0;
+      let val2 = current2 ? current2.val : 0;
+      let sum = val1 + val2 + carry;
+      let digit = sum % 10;
+      carry = sum > 9 ? 1 : 0;
+      
+      tail.next = new Node(digit);
+      tail = tail.next;
+      
+      if (current1) current1 = current1.next;
+      if (current2) current2 = current2.next;
     }
-    return dummyNode.next;
-};
+    
+    return dummy.next;
+  };
