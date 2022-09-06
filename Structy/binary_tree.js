@@ -64,3 +64,17 @@ const treeIncludes = (root, target) => {
 
     return false;
 };
+
+const treeMinValue = (root) => {
+    let min = Infinity;
+    let queue = [ root ];
+    
+    while (queue.length) {
+        let current = queue.shift();
+        if (current.left) queue.push(current.left);
+        if (current.right) queue.push(current.right);
+        if (current.val < min) min = current.val;
+    }
+
+    return min;
+};
