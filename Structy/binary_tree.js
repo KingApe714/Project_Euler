@@ -85,3 +85,17 @@ const maxPathSum = (root) => {
     let maxPath = Math.max(maxPathSum(root.left), maxPathSum(root.right));
     return root.val + maxPath;
 };
+
+const pathFinder = (root, target) => {
+    if (root === null) return null;
+    if (root.val === target) return [ root.val ];
+    let leftNodes = pathFinder(root.left, target); //this is an array
+    let rightNodes = pathFinder(root.right, target);
+    
+    // arr = [];
+    
+    if (leftNodes) return [ root.val ].concat(leftNodes);
+    if (rightNodes) return [ root.val ].concat(rightNodes);
+      
+    return null;
+};
