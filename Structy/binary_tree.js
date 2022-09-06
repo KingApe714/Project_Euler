@@ -78,3 +78,10 @@ const treeMinValue = (root) => {
 
     return min;
 };
+
+const maxPathSum = (root) => {
+    if (root === null) return -Infinity;
+    if (root.left === null && root.right === null) return root.val;
+    let maxPath = Math.max(maxPathSum(root.left), maxPathSum(root.right));
+    return root.val + maxPath;
+};
