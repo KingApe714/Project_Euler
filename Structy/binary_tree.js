@@ -51,3 +51,16 @@ const treeSum = (root) => {
 
     return sum;
 };
+
+const treeIncludes = (root, target) => {
+    let queue = root ? [ root ] : [];
+    
+    while (queue.length) {
+        let current = queue.shift();
+        if (current.left) queue.push(current.left);
+        if (current.right) queue.push(current.right);
+        if (current.val === target) return true;
+    }
+
+    return false;
+};
