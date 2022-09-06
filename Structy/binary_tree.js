@@ -36,3 +36,18 @@ const breadthFirstValues = (root) => {
 
     return arr;
 };
+
+const treeSum = (root) => {
+    if  (!root) return 0;
+    let sum = 0;
+    let queue = [ root ];
+    
+    while (queue.length) {
+        let current = queue.shift()
+        sum += current.val;
+        if (current.left) queue.push(current.left);
+        if (current.right) queue.push(current.right);
+    }
+
+    return sum;
+};
