@@ -99,3 +99,10 @@ const pathFinder = (root, target) => {
       
     return null;
 };
+
+const treeValueCount = (root, target) => {
+    // todo
+    if (root === null) return 0;
+    let match = root.val === target ? 1 : 0
+    return match + treeValueCount(root.left, target) + treeValueCount(root.right, target);
+}
