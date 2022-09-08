@@ -106,3 +106,10 @@ const treeValueCount = (root, target) => {
     let match = root.val === target ? 1 : 0
     return match + treeValueCount(root.left, target) + treeValueCount(root.right, target);
 }
+
+const howHigh = (node) => {
+    if (node === null) return -1
+    let leftPath = 1 + howHigh(node.left);
+    let rightPath = 1 + howHigh(node.right);
+    return leftPath > rightPath ? leftPath : rightPath;
+};
