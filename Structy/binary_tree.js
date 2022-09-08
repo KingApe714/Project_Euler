@@ -113,3 +113,15 @@ const howHigh = (node) => {
     let rightPath = 1 + howHigh(node.right);
     return leftPath > rightPath ? leftPath : rightPath;
 };
+
+const bottomRightValue = (root, count=0) => {
+    let queue = [ root ];
+    node = null;
+    while (queue.length) {
+        node = queue.shift();
+        node.left && queue.push(node.left);
+        node.right && queue.push(node.right);
+    }
+
+    return node.val;
+};
