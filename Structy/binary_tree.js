@@ -114,7 +114,7 @@ const howHigh = (node) => {
     return leftPath > rightPath ? leftPath : rightPath;
 };
 
-const bottomRightValue = (root, count=0) => {
+const bottomRightValue = (root) => {
     let queue = [ root ];
     node = null;
     while (queue.length) {
@@ -124,4 +124,19 @@ const bottomRightValue = (root, count=0) => {
     }
 
     return node.val;
+};
+
+const allTreePaths = (root) => {
+    if (root === null) return [];
+    if (root.left === null && root.right === null) return [ [root.val] ]
+    let leftPath = allTreePaths(root.left);
+    let rightPath = allTreePaths(root.right);
+    let paths = [];
+    leftPath.forEach(path => {
+        paths.push([ root.val ].concat(path));
+    })
+    rightPath.forEach(path => {
+        paths.push([ root.val ].concat(path));
+    })
+    return paths;
 };
