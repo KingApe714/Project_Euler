@@ -182,3 +182,19 @@ const levelAverages = (root) => {
     console.log(arr)
     return arr.map(inner => inner.reduce((acc, ele) => acc + ele, 0) / inner.length);
 };
+
+const leafList = (root) => {
+    // todo
+    if (root === null) return [];
+    let stack = [ root ];
+    let arr = [];
+    
+    while (stack.length) {
+        let node = stack.pop();
+        if (node.left === null && node.right === null) arr.push(node.val);
+        if (node.right) stack.push(node.right);
+        if (node.left) stack.push(node.left);
+    }
+
+    return arr;
+};
