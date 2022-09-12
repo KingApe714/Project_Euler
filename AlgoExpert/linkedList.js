@@ -39,3 +39,25 @@ function reverseLinkedList(head) {
   
     return tail;
 }
+
+function mergeLinkedLists(headOne, headTwo) {
+    // Write your code here.
+    let dummy = new LinkedList(null);
+    let tail = dummy;
+    let current1 = headOne;
+    let current2 = headTwo;
+    while (current1 && current2) {
+        if (current1.value < current2.value) {
+            tail.next = current1;
+            current1 = current1.next;
+        } else {
+            tail.next = current2;
+            current2 = current2.next;
+        }
+        tail = tail.next;
+    }
+  
+    if (current1) tail.next = current1;
+    if (current2) tail.next = current2;
+    return dummy.next;
+}
