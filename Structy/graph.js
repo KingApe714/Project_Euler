@@ -100,3 +100,28 @@ const buildGraph = edges => {
     return graph;
 }
 
+const connectedComponentsCount = (graph) => {
+    // todo
+    //the goal of this function is to count the islands that exist in this graph
+    //i want to traverse each nodes' neighbors
+    const visited = new Set();
+    let count = 0;
+    for (let node in graph) {
+      if (explore(graph, node, visited)) count++;
+    }
+    
+    return count;
+};
+
+const explore = (graph, current, visited) => {
+    if (visited.has(String(current))) return false;
+
+    visited.add(String(current));
+
+    for (let neighbor of graph[current]) {
+        explore(graph, neighbor, visited);
+    }
+
+    //this return true tells me that I've seen all of the nodes in this component or island
+    return true;
+}
