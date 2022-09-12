@@ -13,3 +13,29 @@ function removeDuplicatesFromLinkedList(linkedList) {
     }
     return linkedList;
 }
+
+function findLoop(head) {
+    // Write your code here.
+    let current = head;
+    while (current) {
+        if (current.seen) { //check to see if the node is seen
+            return current;
+        }
+        //initialize a .seen key for every node that is seen
+        current.seen = true;
+        current = current.next;
+    }
+}
+
+function reverseLinkedList(head) {
+    let tail = null;
+    let current = head;
+    while (current) {
+        let next = current.next;
+        current.next = tail;
+        tail = current;
+        current = next;
+    }
+  
+    return tail;
+}
