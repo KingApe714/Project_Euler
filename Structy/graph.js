@@ -58,8 +58,44 @@ const hasPath = (graph, src, dst) => {
 const hasPath2 = (graph, src, dst) => {
     if (src === dst) return true;
     for (let neighbor of graph[src]) {
-        if (hasPath(graph, neighbor, dst)) return true;
+        if (hasPath2(graph, neighbor, dst)) return true;
     }
 
     return false;
 };
+
+const undirectedPath = (edges, nodeA, nodeB) => {
+    const graph = buildGraph(edges)
+    return hasPath3(graph, nodeA, nodeB);
+  };
+  
+const hasPath3 = (graph, src, dst) => {
+    let queue = [ src ];
+    let visited = new Set()
+    while (queue.length) {
+        let node = queue.shift()
+        for (let neighbor of graph[node]) {
+        if (!visited.has(neighbor)) {
+            queue.push(neighbor);
+        }
+        if (neighbor === dst) return true;
+        }
+        visited.add(node);
+    }
+
+    return false;
+}
+
+const buildGraph = edges => {
+    let graph = {};
+
+    for (let edge of edges) {
+        let [a, b] = edge;
+        if (!(a in graph)) graph[a] = [];
+        if (!(b in graph)) graph[b] = [];
+        graph[a].push(b);
+        graph[b].push(a);
+    }
+
+    return graph;
+}
