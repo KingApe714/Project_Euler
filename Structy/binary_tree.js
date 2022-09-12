@@ -140,3 +140,24 @@ const allTreePaths = (root) => {
     })
     return paths;
 };
+
+const treeLevels = (root) => {
+    if (root === null) return [];
+    let queue = [ {level: 0, node: root} ];
+    let arr = [];
+    
+    while (queue.length) {
+        let { level, node } = queue.shift();
+        
+        if (arr.length === level) {
+        arr.push([ node.val ])
+        } else {
+        arr[level].push(node.val)
+        }
+        
+        if (node.left) queue.push({ level: level + 1, node: node.left})
+        if (node.right) queue.push({ level: level + 1, node: node.right})
+    }
+    
+    return arr;
+};
