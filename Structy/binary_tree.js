@@ -161,3 +161,24 @@ const treeLevels = (root) => {
     
     return arr;
 };
+
+const levelAverages = (root) => {
+    if (root === null) return [];
+    let arr = []
+    let queue = [{node: root, level: 0}];
+    
+    while (queue.length) {
+        let { node, level } = queue.shift();
+        
+        if (arr.length === level) {
+        arr.push([ node.val ]);
+        } else {
+        arr[level].push(node.val);
+        }
+        
+        if (node.left) queue.push({node: node.left, level: level + 1})
+        if (node.right) queue.push({node: node.right, level: level + 1})
+    }
+    console.log(arr)
+    return arr.map(inner => inner.reduce((acc, ele) => acc + ele, 0) / inner.length);
+};
