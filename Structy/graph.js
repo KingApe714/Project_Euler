@@ -125,3 +125,55 @@ const explore = (graph, current, visited) => {
     //this return true tells me that I've seen all of the nodes in this component or island
     return true;
 }
+
+const largestComponent = (graph) => {
+    let visited = new Set();
+    let max = 0;
+    for (let node in graph) {
+        let current = explore2(graph, node, visited);
+        if (current > max) max = current;
+    }
+
+    return max;
+}
+  
+const explore2 = (graph, node, visited) => {
+    if (visited.has(String(node))) return 0;
+    visited.add(String(node));
+    
+    let count = 1;
+    for (let n of graph[node]) {
+        count += explore2(graph, n, visited)
+    }
+
+    return count;
+}
+
+const shortestPath = (edges, nodeA, nodeB) => {
+    const graph = buildGraph2(edges);
+    const visited = new Set([nodeA]);
+    const queue = [ [nodeA, 0] ];
+    while (queue.length) {
+        let [current, count] = queue.shift();
+        if (current === nodeB) return count;
+        for (let neighbor of graph[current]) {
+        if (!visited.has(neighbor)) {
+            visited.add(neighbor);
+            queue.push([neighbor, count + 1])
+        }
+        }
+    }
+    return -1;
+}
+
+const buildGraph2 = edges => {
+    const graph = {};
+    for (let edge of edges) {
+        let [a, b] = edge;
+        if (!(a in graph)) graph[a] = [];
+        if (!(b in graph)) graph[b] = [];
+        graph[a].push(b);
+        graph[b].push(a);
+    }
+    return graph;
+}
