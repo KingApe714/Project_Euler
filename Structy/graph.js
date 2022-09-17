@@ -203,3 +203,28 @@ const explore1 = (grid, i, j, visited) => {
     explore1(grid, i, j - 1, visited);
     return true;
 }
+
+const minimumIsland = (grid) => {
+    let visited = new Set();
+    let min = Infinity;
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[0].length; j++) {
+            let current = explore3(grid, i, j, visited);
+            if (current !== 0 && current < min) min = current;
+        }
+    }
+    return min;
+};
+const explore3 = (grid, i, j, visited) => {
+    if (i < 0 || i >= grid.length 
+        || j < 0 || j >= grid[0].length) return 0;
+    if (visited.has(`${i},${j}`)) return 0;
+    visited.add(`${i},${j}`)
+    if (grid[i][j] === 'W') return 0;
+    let count = 1;
+    count += explore3(grid, i + 1, j, visited, count);
+    count += explore3(grid, i - 1, j, visited, count);
+    count += explore3(grid, i, j + 1, visited, count);
+    count += explore3(grid, i, j - 1, visited, count);
+    return count;
+}
