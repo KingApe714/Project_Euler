@@ -177,3 +177,29 @@ const buildGraph2 = edges => {
     }
     return graph;
 }
+
+const islandCount = (grid) => {
+    // todo
+    let visited = new Set()
+    let count = 0;
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[0].length; j++) {
+            if (explore1(grid, i, j, visited)) count++;
+        }
+    }
+    return count;
+};
+  
+const explore1 = (grid, i, j, visited) => {
+    if (i < 0 || i >= grid.length ||
+        j < 0 || j >= grid[0].length) return false;
+    if (visited.has(`${i},${j}`)) return false;
+    visited.add(`${i},${j}`);
+
+    if (grid[i][j] === 'W') return false;
+    explore1(grid, i + 1, j, visited);
+    explore1(grid, i - 1, j, visited);
+    explore1(grid, i, j + 1, visited);
+    explore1(grid, i, j - 1, visited);
+    return true;
+}
