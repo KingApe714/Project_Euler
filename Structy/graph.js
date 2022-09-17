@@ -228,3 +228,26 @@ const explore3 = (grid, i, j, visited) => {
     count += explore3(grid, i, j - 1, visited, count);
     return count;
 }
+
+const closestCarrot = (grid, startRow, startCol) => {
+    let visited = new Set([`${startRow},${startCol}`]);
+    let queue = [[startRow, startCol, 0]];
+    let deltas = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+    while (queue.length) {
+        let [row, col, dist] = queue.shift();
+        if (grid[row][col] === 'C') return dist;
+        for (let delta of deltas) {
+            let [cRow, cCol] = delta;
+            let dRow = row + cRow;
+            let dCol = col + cCol;
+            if (dRow >= 0 && dRow < grid.length
+            && dCol >= 0 && dCol < grid[0].length
+            && grid[dRow][dCol] !== 'X'
+            && !visited.has(`${dRow},${dCol}`)) {
+                visited.add(`${dRow},${dCol}`)
+                queue.push([dRow, dCol, dist + 1])
+            }
+        }
+    }
+    return -1;
+};
