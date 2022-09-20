@@ -251,3 +251,28 @@ const closestCarrot = (grid, startRow, startCol) => {
     }
     return -1;
 };
+
+const longestPath = (graph) => {
+    let distances = {};
+    for (let node in graph) {
+      if (graph[node].length === 0) { //initialize the terminal nodes
+        distances[node] = 0;
+      }
+    }
+    for (let node in graph) {
+      explore4(graph, node, distances);
+    }
+    return Math.max(...Object.values(distances))
+}
+const explore4 = (graph, node, distances) => {
+    if (node in distances) return distances[node];
+
+    let maxLength = 0;
+    for (let neighbor of graph[node]) {
+        const attempt = explore4(graph, neighbor, distances);
+        if (attempt > maxLength) maxLength = attempt;
+    }
+
+    distances[node] = maxLength + 1;
+    return distances[node];
+}
