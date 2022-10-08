@@ -276,3 +276,40 @@ const explore4 = (graph, node, distances) => {
     distances[node] = maxLength + 1;
     return distances[node];
 }
+
+const semestersRequired = (numCourses, prereqs) => {
+    let graph = buildGraph1(numCourses, prereqs);
+    let distances = {};
+    for (let node in graph) {
+      if (graph[node].length === 0) distances[node] = 1;
+    }
+    
+    for (let node in graph) {
+      traverse(node, graph, distances)
+    }
+    return Math.max(...Object.values(distances));
+};
+
+const traverse = (node, graph, distances) => {
+    if (node in distances) return distances[node];
+
+    let max = 0;
+    for (let neighbor of graph[node]) {
+        let current = traverse(neighbor, graph, distances);
+        if (current > max) max = current;
+    }
+    distances[node] = max + 1;
+    return distances[node];
+}
+
+const buildGraph1 = (numCourses, prereqs) => {
+    let graph = {};
+    for (let i = 0; i < numCourses; i++) {
+        graph[i] = [];
+    }
+    for (let prereq of prereqs) {
+        let [a, b] = prereq;
+        graph[a].push(b);
+    }
+    return graph;
+}
