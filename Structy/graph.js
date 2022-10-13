@@ -360,7 +360,7 @@ const isInbounds = (grid, r, c) => {
     return rowInbounds && colInbounds;
 }
 
-    const traverseIsland = (grid, r, c, visited) => {
+const traverseIsland = (grid, r, c, visited) => {
     if (!isInbounds(grid, r, c) || grid[r][c] === "W") return visited;
 
     const pos = r + ',' + c;
