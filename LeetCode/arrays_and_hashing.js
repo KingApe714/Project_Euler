@@ -60,3 +60,18 @@ var lengthOfLastWord = function(s) {
     
     return 0;
 };
+
+var twoSum = function(nums, target) {
+    let obj = {};
+    
+    for (let i = 0; i < nums.length; i++) {
+        let currentNum = nums[i];
+        let currentTarget = target - currentNum;
+        
+        if (obj[currentTarget] !== undefined) {
+            return [obj[currentTarget], i]
+        }
+        
+        obj[currentNum] = i;
+    }
+};
