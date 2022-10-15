@@ -48,3 +48,15 @@ var isSubsequence = function(s, t) {
     if (t.length === 0) return false;
     return s[0] === t[0] ? isSubsequence(s.slice(1), t.slice(1)) : isSubsequence(s, t.slice(1))
 };
+
+var lengthOfLastWord = function(s) {
+    let words = s.split(' ');
+    // console.log(words)
+    
+    for (let i = words.length - 1; i >= 0; i--) {
+        let word = words[i];
+        if (word !== '') return word.length
+    }
+    
+    return 0;
+};
