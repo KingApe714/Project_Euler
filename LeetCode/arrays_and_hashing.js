@@ -42,3 +42,9 @@ var replaceElements = function(arr) {
     
     return newArr;
 };
+
+var isSubsequence = function(s, t) {
+    if (s.length === 0) return true;
+    if (t.length === 0) return false;
+    return s[0] === t[0] ? isSubsequence(s.slice(1), t.slice(1)) : isSubsequence(s, t.slice(1))
+};
