@@ -101,3 +101,15 @@ var longestCommonPrefix = function(strs) {
     
     return prefix;
 };
+
+var groupAnagrams = function(strs) {
+    let arr = [];
+    let obj = {};
+    for (let str of strs) {
+        let sortedWord = str.split('').sort().join('');
+        if (!(sortedWord in obj)) obj[sortedWord] = [];
+        obj[sortedWord].push(str);
+    }
+    console.log(obj)
+    return Object.values(obj)
+};
