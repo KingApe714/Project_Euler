@@ -24,3 +24,21 @@ var isAnagram = function(s, t) {
     }
     return true;
 };
+
+var replaceElements = function(arr) {
+    let current = arr[arr.length - 1]
+    let newArr = [-1];
+    
+    for (let i = arr.length - 2; i >= 0; i--) {
+        let left = arr[i];
+        while (left < current) {
+            newArr.unshift(current);
+            i--
+            left = arr[i]
+        }
+        if (i >= 0) newArr.unshift(current)
+        current = left
+    }
+    
+    return newArr;
+};
