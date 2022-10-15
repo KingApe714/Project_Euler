@@ -75,3 +75,29 @@ var twoSum = function(nums, target) {
         obj[currentNum] = i;
     }
 };
+
+var longestCommonPrefix = function(strs) {
+
+    if (strs.length === 0){
+        return prefix
+    } else if (strs.length === 1){
+        return strs[0]
+    }
+    
+    let prefix = '';
+    let stillPrefix = true;
+    let firstWord = strs[0];
+    let j = 0;
+    if (firstWord.length === 0) return ''
+    while (stillPrefix) {
+        let char = firstWord[j]
+        if (char && strs.every(ele => ele[j] === char)) {
+            prefix += char;
+            j++;
+        } else {
+            break;
+        }
+    }
+    
+    return prefix;
+};
