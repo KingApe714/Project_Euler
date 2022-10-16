@@ -132,3 +132,19 @@ var groupAnagrams2 = function(strs) {
     
     return Object.values(obj);
 };
+
+var generate = function(numRows) {
+    if (numRows === 0) return [];
+    if (numRows === 1) return [[1]];
+    if (numRows === 2) return [[1], [1, 1]];
+    let arr = generate(numRows - 1);
+    let bottom = arr[arr.length - 1];
+    let newBottom = [1]
+    for (let i = 0; i < bottom.length - 1; i++) {
+        let num = bottom[i] + bottom[i + 1];
+        newBottom.push(num);
+    }
+    newBottom.push(1)
+    arr.push(newBottom);
+    return arr;
+};
