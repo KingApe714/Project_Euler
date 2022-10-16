@@ -113,3 +113,22 @@ var groupAnagrams = function(strs) {
     console.log(obj)
     return Object.values(obj)
 };
+
+var groupAnagrams2 = function(strs) {
+    let obj = {};
+    
+    for (let str of strs) {
+        let charCount = new Array(26).fill(0);
+        
+        for (let i = 0; i < str.length; i++) {
+            let char = str[i];
+            let pos = char.charCodeAt(0) - 'a'.charCodeAt(0);
+            charCount[pos]++;
+        }
+        
+        if (!(charCount in obj)) obj[charCount] = [];
+        obj[charCount].push(str)
+    }
+    
+    return Object.values(obj);
+};
