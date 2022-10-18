@@ -12,3 +12,22 @@ var isPalindrome = function(s) {
     
     return isPalindrome(s.slice(i + 1, j))
 };
+
+var minimumDifference = function(nums, k) {
+    nums.sort((a, b) => a - b);
+    console.log(nums)
+    let i = 0;
+    let j = k - 1;
+    let min = Infinity;
+    if (nums.length <= 1 || k > nums.length) {
+        return 0;
+    }
+    while (j < nums.length) {
+        if (nums[j] - nums[i] < min) {
+            min = nums[j] - nums[i];
+        }
+        i++;
+        j++;
+    }
+    return min;
+};
