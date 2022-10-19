@@ -146,8 +146,33 @@ var generate = function(numRows) {
         let num = bottom[i] + bottom[i + 1];
         newBottom.push(num);
     }
-    
+
     newBottom.push(1)
     arr.push(newBottom);
     return arr;
+};
+
+var isValidSudoku = function(board) {
+    let seen = new Set();
+    
+    for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[0].length; j++) {
+            if (board[i][j] === '.') continue;
+            
+            let value = board[i][j];
+            let row = `row at ${i} has ${value}`
+            let col = `col at ${j} has ${value}`
+            let box = `box at ${Math.floor(i/3)},${Math.floor(j/3)} has ${value}`
+            
+            if (seen.has(row) || seen.has(col) || seen.has(box)) {
+                return false;
+            }
+            
+            seen.add(row);
+            seen.add(col);
+            seen.add(box);
+        }
+    }
+    
+    return true;
 };
