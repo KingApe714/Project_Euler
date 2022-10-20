@@ -23,3 +23,27 @@ const binarySearchTreeIncludes = (root, target) => {
     return binarySearchTreeIncludes(root.right, target);
   }
 };
+
+const combineIntervals = (intervals) => {
+  // todo
+  intervals.sort((a, b) => a[0] - b[0]);
+  let arr = [];
+  let current = intervals[0];
+  console.log(intervals)
+  for (let i = 1; i < intervals.length; i++) {
+    let [a, b] = current;
+    let [c, d] = intervals[i];
+    if (b >= c) {
+      if (!(b >= d)) {
+        current = [a, d];
+      }
+    } else {
+      arr.push(current);
+      current = [c, d];
+    }
+  }
+  
+  if (!arr.includes(current)) arr.push(current);
+       
+  return arr;
+};
