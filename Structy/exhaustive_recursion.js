@@ -8,3 +8,21 @@ const subsets = (elements) => {
     }
     return [...remaining, ...arr]
 };
+
+const permutations = (items) => {
+    // todo
+    if (items.length === 0) return [ [] ];
+    let first = items[0];
+    let arr = permutations(items.slice(1));
+    let perms = [];
+    
+    for (let inner of arr) {
+      for (let i = 0; i <= inner.length; i++) {
+        perms.push(
+          [...inner.slice(0, i), first, ...inner.slice(i)]
+        )
+      }
+    }
+    
+    return perms;
+};
