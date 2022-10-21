@@ -200,7 +200,7 @@ const isIsomorphic = (s, t) => {
     return true;
 };
 
-var numUniqueEmails = function(emails) {
+const numUniqueEmails = function(emails) {
     let arr = [];
     
     for (let email of emails) {
@@ -213,4 +213,19 @@ var numUniqueEmails = function(emails) {
     }
     
     return arr.length;
+};
+
+const canPlaceFlowers = (flowerbed, n) => {
+    
+    for (let i = 0; i < flowerbed.length; i++) {
+        let left = flowerbed[i - 1];
+        let mid = flowerbed[i];
+        let right = flowerbed[i + 1];
+        if (!left && !mid && !right) {
+            flowerbed[i] = 1
+            n--;
+        }
+    }
+    console.log(flowerbed)
+    return n <= 0;
 };
