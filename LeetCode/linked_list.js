@@ -34,3 +34,44 @@ const mergeTwoLists = (list1, list2) => {
     
     return dummyHead.next;
 };
+
+const isPalindrome = head => {
+    if (!head.next) return true
+    let slow = head;
+    let fast = head;
+    
+    while (slow && fast) {
+        slow = slow.next;
+        if (fast.next) {
+            fast = fast.next.next;
+        } else {
+            break;
+        }
+    }
+    
+    let revHalf = reverse(slow);
+    let current = head;
+    while (current && revHalf) {
+        if (current.val !== revHalf.val) {
+            return false;
+        }
+        current = current.next;
+        revHalf = revHalf.next;
+    }
+    
+    return true
+};
+
+const reverse = head => {
+    let current = head
+    let tail = null;
+    
+    while (current) {
+        let next = current.next;
+        current.next = tail;
+        tail = current;
+        current = next;
+    }
+    
+    return tail;
+}

@@ -61,3 +61,51 @@ function mergeLinkedLists(headOne, headTwo) {
     if (current2) tail.next = current2;
     return dummy.next;
 }
+
+class LinkedList {
+    constructor(value) {
+      this.value = value;
+      this.next = null;
+    }
+}
+  
+function linkedListPalindrome(head) {
+    // Write your code here.
+    let slow = head;
+    let fast = head;
+  
+    while (slow && fast) {
+      slow = slow.next;
+      if (fast.next) {
+        fast = fast.next.next;
+      } else {
+        break
+      }
+    }
+  
+    let current = head;
+    let revHalf = reverse(slow);
+  
+    while (current && revHalf) {
+      if (current.value !== revHalf.value) {
+        return false;
+      }
+      current = current.next;
+      revHalf = revHalf.next;
+    }
+    return true;
+}
+  
+const reverse = head => {
+    let current = head;
+    let tail = null;
+  
+    while (current) {
+      let next = current.next;
+      current.next = tail;
+      tail = current;
+      current = next;
+    }
+    
+    return tail;
+  }
