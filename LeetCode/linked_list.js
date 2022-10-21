@@ -106,3 +106,17 @@ const addTwoNumbers = function(l1, l2) {
     
     return newList;
 };
+
+const hasCycle = head => {
+    let current = head;
+    
+    while (current) {
+        if (current.seen) {
+            return true
+        }
+        current.seen = true;
+        current = current.next;
+    }
+    
+    return false;
+};
