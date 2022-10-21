@@ -176,3 +176,26 @@ var isValidSudoku = function(board) {
     
     return true;
 };
+
+const isIsomorphic = (s, t) => {
+    if (s.length !== t.length) return false;
+    let obj1 = {};
+    let obj2 = {};
+    
+    for (let i = 0; i < s.length; i++) {
+        let chr1 = s[i];
+        let chr2 = t[i];
+        
+        if (!(chr1 in obj1)) {
+            obj1[chr1] = chr2;
+        }
+        if (!(chr2 in obj2)) {
+            obj2[chr2] = chr1;
+        }
+        
+        if (obj1[chr1] !== chr2) return false;
+        if (obj2[chr2] !== chr1) return false;
+    }
+    
+    return true;
+};
