@@ -229,3 +229,16 @@ const canPlaceFlowers = (flowerbed, n) => {
     console.log(flowerbed)
     return n <= 0;
 };
+
+const majorityElement = function(nums) {
+    let obj = {};
+    
+    for (let num of nums) {
+        if (!(num in obj)) obj[num] = 0;
+        obj[num]++;
+    }
+    
+    for (let key in obj) {
+        if (obj[key] > nums.length / 2) return key;
+    }
+};
