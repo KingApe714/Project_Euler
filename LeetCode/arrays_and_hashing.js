@@ -199,3 +199,18 @@ const isIsomorphic = (s, t) => {
     
     return true;
 };
+
+var numUniqueEmails = function(emails) {
+    let arr = [];
+    
+    for (let email of emails) {
+        let [local, domain] = email.split('@')
+        let actualEmail = local.split('.').join('').split('+')[0] + '@' + domain
+        console.log(actualEmail)
+        if (!arr.includes(actualEmail)) {
+            arr.push(actualEmail)
+        }
+    }
+    
+    return arr.length;
+};
