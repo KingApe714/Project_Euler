@@ -40,3 +40,23 @@ const guessNumber = n => {
     }
     return find(0, n, 5);
 };
+
+const sortedSquares = nums => {
+    let i = 0;
+    let j = nums.length - 1;
+    let arr = [];
+    
+    while (i <= j) {
+        let first = nums[i] ** 2;
+        let last = nums[j] ** 2;
+        if (first > last) {
+            arr.push(first);
+            i++;
+        } else {
+            arr.push(last);
+            j--;
+        }
+    }
+    
+    return arr.reverse();
+};
