@@ -30,3 +30,13 @@ const searchInsert = (nums, target) => {
         return res + mid + 1;
     }
 };
+
+const guessNumber = n => {
+    const find = (low, high) => {
+        let mid = Math.floor((high + low) / 2);
+        if (guess(mid) === 0) return mid;
+        if (guess(mid) === 1) return find(mid + 1, n);
+        if (guess(mid) === -1) return find(low, mid - 1);
+    }
+    return find(0, n, 5);
+};
