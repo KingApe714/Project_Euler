@@ -242,3 +242,19 @@ const majorityElement = function(nums) {
         if (obj[key] > nums.length / 2) return key;
     }
 };
+
+const pivotIndex = nums => {
+    
+    let totalSum = nums.reduce((acc, ele) => acc + ele, 0);
+    let sum = 0;
+    
+    for (let i = 0; i < nums.length; i++) {
+        if (totalSum - sum - nums[i] === sum) {
+            return i;
+        }
+            
+        sum += nums[i];
+    }
+    
+    return -1;
+};
