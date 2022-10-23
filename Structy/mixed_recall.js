@@ -77,3 +77,22 @@ const dfs = (grid, s, i, j) => {
   
   return res;
 }
+
+const lexicalOrder = (word1, word2, alphabet) => {
+  let max = Math.max(word1.length, word2.length);
+
+  for (let i = 0; i < max; i++) {
+    let chr1 = word1[i];
+    let chr2 = word2[i];
+    let idx1 = alphabet.indexOf(chr1);
+    let idx2 = alphabet.indexOf(chr2);
+    
+    if (idx1 < idx2) {
+      return true;
+    } else if (idx1 > idx2) {
+      return false;
+    }
+  }
+  
+  return true;
+};
