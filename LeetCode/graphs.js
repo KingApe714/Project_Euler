@@ -17,3 +17,32 @@ const islandPerimeter = grid => {
     
     return count;
 };
+
+const numIslands = grid => {
+    let count = 0;
+    let visited = new Set()
+    
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[0].length; j++) {
+            if (explore(grid, i, j, visited)) count++;
+        }
+    }
+    
+    return count;
+};
+
+const explore = (grid, i, j, visited) => {
+    if (visited.has(`${i},${j}`)) return false;
+    if (i < 0 || i >= grid.length
+       || j < 0 || j >= grid[0].length) return false;
+    if (grid[i][j] === "0") return false;
+    
+    visited.add(`${i},${j}`);
+    
+    explore(grid, i + 1, j, visited);
+    explore(grid, i - 1, j, visited);
+    explore(grid, i, j + 1, visited);
+    explore(grid, i, j - 1, visited);
+    
+    return true;
+}
