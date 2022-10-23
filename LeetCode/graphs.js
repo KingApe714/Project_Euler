@@ -77,3 +77,4 @@ const explore1 = (grid, i, j, visited) => {
     
     return count;
 }
+
