@@ -54,3 +54,25 @@ const eraseOverlapIntervals = intervals => {
     
     return count;
 };
+
+const removeCoveredIntervals = intervals => {
+    intervals.sort((a, b) => a[0] - b[0]);
+    let current = intervals[0];
+    let remaining = intervals.length;
+    
+    for (let i = 1; i < intervals.length; i++) {
+        let [a, b] = intervals[i];
+        let [c, d] = current;
+        
+        if (c <= a && d >= b) {
+            remaining--;
+        } else if (a <= c && b >= d) {
+            remaining--;
+            current = intervals[i];
+        } else {
+            current = intervals[i];
+        }
+    }
+    
+    return remaining;
+};
