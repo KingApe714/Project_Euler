@@ -35,3 +35,22 @@ const merge = intervals => {
     
     return merged;
 };
+
+const eraseOverlapIntervals = intervals => {
+    intervals.sort((a, b) => a[1] - b[1]);
+    let prev = intervals[0];
+    let count = 0;
+    
+    for (let i = 1; i < intervals.length; i++) {
+        let [a, b] = prev;
+        let [c, d] = intervals[i];
+        
+        if (c < b) {
+            count++;
+        } else {
+            prev = intervals[i];
+        }
+    }
+    
+    return count;
+};
