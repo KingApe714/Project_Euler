@@ -302,3 +302,7 @@ const wordPattern = (pattern, s) => {
     
     return true;
 };
+
+const arrayStringsAreEqual = (word1, word2) => {
+    return word1.join('') === word2.join('')
+};
