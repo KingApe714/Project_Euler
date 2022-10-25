@@ -281,3 +281,24 @@ const merge = (nums1, m, nums2, n) => {
         k--;
     }
 }
+
+const wordPattern = (pattern, s) => {
+    let obj = {};
+    let words = s.split(' ');
+    if (words.length !== pattern.length) return false;
+    if (new Set(words).size !== new Set(pattern.split('')).size) return false;
+    
+    for (let i = 0; i < words.length; i++) {
+        let chr = pattern[i];
+        let word = words[i];
+        if (!(chr in obj)) {
+            obj[chr] = word
+        } else {
+            if (chr in obj && obj[chr] !== word) {
+                return false;
+            }
+        }
+    }
+    
+    return true;
+};
