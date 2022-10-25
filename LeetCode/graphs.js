@@ -78,3 +78,32 @@ const explore1 = (grid, i, j, visited) => {
     return count;
 }
 
+const isAlienSorted = (words, order) => {
+    let obj = {};
+    
+    //have the character reference the index
+    for (let i = 0; i < order.length; i++)
+        obj[order[i]] = i;
+    
+    //now loop through the words array;
+    for (let i = 1; i < words.length; i++) {
+        let word1 = words[i - 1];
+        let word2 = words[i];
+        
+        for (let j = 0; j < word1.length; j++) {
+            if (!word2[j]) return false
+            let chr1 = word1[j];
+            let chr2 = word2[j];
+            let idx1 = obj[chr1];
+            let idx2 = obj[chr2];
+            
+            if (idx1 > idx2) {
+                return false;
+            } else if (idx1 < idx2) {
+                break;
+            }
+        }
+    }
+    
+    return true;
+};
