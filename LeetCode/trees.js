@@ -56,3 +56,10 @@ const equalTree2 = (a, b) => {
     
     return equalTree(a.left, b.left) && equalTree(a.right, b.right)
 }
+
+const hasPathSum = (root, targetSum) => {
+    if (!root) return false;
+    if ((!root.left && !root.right) && (root.val - targetSum === 0)) return true;
+    
+    return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val)
+};
