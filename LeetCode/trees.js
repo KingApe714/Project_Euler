@@ -42,3 +42,17 @@ const equalTree = (a, b) => {
     
     return equalTree(a.left, b.left) && equalTree(a.right, b.right)
 }
+
+const isSubtree2 = (root, subRoot) => {
+    if (!root) return false;
+    if (root.val === subRoot.val && equalTree(root, subRoot)) return true;
+    
+    return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot)
+}
+
+const equalTree2 = (a, b) => {
+    if (!a || !b) return !a && !b;
+    if (a.val !== b.val) return false;
+    
+    return equalTree(a.left, b.left) && equalTree(a.right, b.right)
+}
