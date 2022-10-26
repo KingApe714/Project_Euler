@@ -393,3 +393,34 @@ const topKFrequent = (nums, k) => {
         return parseInt(ele[0])
     }).slice(0, k)
 };
+
+const topKFrequent2 = (nums, k) => {
+    let obj = {}
+    
+    for (let num of nums) {
+        if (!(num in obj)) obj[num] = 0
+        obj[num]++
+    }
+    
+    //now implement the bucket sort system with the indices referencing the counts and the elements are arrays
+    let buckets = new Array(nums.length + 1)
+    //now loop through the object and push the nums in their respective indices
+    for (let num in obj) {
+        let count = obj[num]
+        if (!buckets[count]) buckets[count] = [];
+        buckets[count].push(parseInt(num))
+    }
+    //now loop backward through the buckets array and push in k amount of elements
+    let arr = [];
+    let h = 0;
+    for (let i = buckets.length - 1; i >= 0 && h < k; i--) {
+        if (buckets[i]) {
+            for (let j = 0; j < buckets[i].length && h < k; j++) {
+                arr.push(buckets[i][j]);
+                h++;
+            }
+        }
+    }
+    
+    return arr;
+};
