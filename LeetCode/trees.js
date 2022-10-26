@@ -74,3 +74,12 @@ const mergeTrees = (root1, root2) => {
         return root1
     }
 };
+
+const maxDepth = (root, current=1) => {
+    if (!root) return 0;
+    if (!root.left && !root.right) return current;
+    let left = root.left ? maxDepth(root.left, current + 1) : 0;
+    let right = root.right ? maxDepth(root.right, current + 1) : 0;
+    
+    return Math.max(left, right);
+};
