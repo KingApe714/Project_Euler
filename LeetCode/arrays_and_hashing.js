@@ -424,3 +424,23 @@ const topKFrequent2 = (nums, k) => {
     
     return arr;
 };
+
+const frequencySort = s => {
+    let obj = {};
+    
+    for (let chr of s) {
+        if (!(chr in obj)) obj[chr] = 0;
+        obj[chr]++;
+    }
+    
+    let buckets = new Array(s.length + 1).fill('');
+    
+    for (let chr in obj) {
+        let count = obj[chr];
+        let str = '';
+        for (let i = 0; i < count; i++) str += chr;
+        buckets[count] += str;
+    }
+    
+    return buckets.reverse().join('');
+};
