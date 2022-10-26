@@ -26,3 +26,27 @@ const isPalindrome = x => {
     
     return true;
 };
+
+const isHappy = n => {
+    let num = n;
+    let nextNum = 0;
+    let set = new Set()
+    while (true) {
+        
+        while (num >= 1) {
+            nextNum += (num % 10) ** 2;
+            num = Math.floor(num / 10)
+        }
+        
+        if (set.has(nextNum)) return false;
+        
+        set.add(nextNum)
+        
+        if (nextNum === 1) return true;
+        
+        num = nextNum
+        nextNum = 0;
+    }
+    
+    return false;
+};
