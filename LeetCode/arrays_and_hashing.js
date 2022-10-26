@@ -372,3 +372,24 @@ const findDisappearedNumbers = nums => {
     
     return disappeared;
 };
+
+const topKFrequent = (nums, k) => {
+    let obj = {};
+    let arr = [];
+    
+    for (let num of nums) {
+        if (obj[num]) {
+            obj[num]++;
+        } else {
+            obj[num] = 1
+        }
+    }
+    
+    for (let key in obj) {
+        arr.push([key, obj[key]]);
+    }
+    
+    return arr.sort((a, b) => b[1] - a[1]).map(ele => {
+        return parseInt(ele[0])
+    }).slice(0, k)
+};
