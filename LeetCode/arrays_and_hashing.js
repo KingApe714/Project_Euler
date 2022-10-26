@@ -336,3 +336,28 @@ const removeElement = (nums, val) => {
         }
     }
 };
+
+const nextGreaterElement = (nums1, nums2) => {
+    let obj = {};
+    let ans = [];
+    
+    for (let i = 0; i < nums2.length; i++) {
+        obj[nums2[i]] = i;
+    }
+    
+    for (let i = 0; i < nums1.length; i++) {
+        let idx = obj[nums1[i]];
+        let num = nums1[i]
+        let newNum = -1;
+        for (let j = idx + 1; j < nums2.length; j++) {
+            if (nums2[j] > num) {
+                newNum = nums2[j];
+                break;
+            }
+        }
+        ans.push(newNum);
+        
+    }
+    
+    return ans;
+};
