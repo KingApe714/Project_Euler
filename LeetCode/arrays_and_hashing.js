@@ -361,3 +361,14 @@ const nextGreaterElement = (nums1, nums2) => {
     
     return ans;
 };
+
+const findDisappearedNumbers = nums => {
+    let numsSet = new Set(nums);
+    let disappeared = [];
+    
+    for (let i = 1; i <= nums.length; i++) {
+        if (!numsSet.has(i)) disappeared.push(i)
+    }
+    
+    return disappeared;
+};
