@@ -97,3 +97,14 @@ const findBottomLeftValue = root => {
     
     return current.val
 };
+
+const invertTree = root => {
+    if (!root) return null;
+    
+    let r = invertTree(root.right);
+    let l = invertTree(root.left)
+    root.left = r;
+    root.right = l;
+    
+    return root;
+};
