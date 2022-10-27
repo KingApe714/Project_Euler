@@ -84,3 +84,18 @@ const spiralOrder = matrix => {
     
     return res;
 };
+
+const myPow = (x, n) => {
+    if (n === 0) return 1
+    
+    let pow = Math.abs(n);
+    let res
+    
+    if (n % 2 === 0) {
+        res = myPow(x * x, pow / 2);
+    } else {
+        res = x * myPow(x * x, (pow - 1) / 2);
+    }
+    
+    return n > 0 ? res : 1 / res
+};
