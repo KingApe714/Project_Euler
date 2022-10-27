@@ -483,3 +483,31 @@ const productExceptSelf = nums => {
     
     return ans;
 };
+
+const strStr = (haystack, needle) => {
+    if (needle.length > haystack.length) return -1;
+    
+    let i = 0;
+    let j = 0;
+    
+    while (i < haystack.length && j < needle.length) {
+        
+        if (haystack[i] === needle[j]) {
+            //I am looking at the last character of the needle so return the index
+            if (j === needle.length - 1) return i - j
+            j++;
+        } else {
+            //subtract i by j in case needle has repeated characters like 'mississippi'
+            i -= j;
+            j = 0;
+        }
+        
+        i++;
+    }
+    
+    if (j === needle.length) {
+        return i - j;
+    } else {
+        return -1;
+    }
+};
