@@ -74,3 +74,10 @@ const addBinary = (a, b) => {
     
     return res;
 };
+
+const missingNumber = nums => {
+    let sum = nums.reduce((acc, ele) => acc + ele, 0);
+    let n = nums.length
+    let expected = n * (n + 1) / 2;
+    return expected - sum;
+};
