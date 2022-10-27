@@ -50,3 +50,37 @@ const isHappy = n => {
     
     return false;
 };
+
+const spiralOrder = matrix => {
+    let res = [];
+    let startRow = 0;
+    let endRow = matrix.length - 1;
+    let startCol = 0;
+    let endCol = matrix[0].length - 1;
+    
+    while (startRow <= endRow && startCol <= endCol) {
+        for (let col = startCol; col <= endCol; col++) {
+            res.push(matrix[startRow][col]);
+        }
+        
+        for (let row = startRow + 1; row <= endRow; row++) {
+            res.push(matrix[row][endCol]);
+        }
+        
+        for (let col = endCol - 1; col >= startCol; col--) {
+            if (startRow === endRow) break;
+            res.push(matrix[endRow][col])
+        }
+        for (let row = endRow - 1; row > startRow; row--) {
+            if (startCol === endCol) break;
+            res.push(matrix[row][startCol]);
+        }
+        
+        startRow++;
+        startCol++;
+        endRow--;
+        endCol--;
+    }
+    
+    return res;
+};
