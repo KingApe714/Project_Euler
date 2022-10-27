@@ -13,6 +13,32 @@ const reverse = x => {
     }
 };
 
+//minimum of -2,147,483,648 and a maximum value of 2,147,483,647 (inclusive)
+
+const reverse1 = x => {
+    let res = 0;
+    let negCheck = 1
+    if (x < 0) {
+        x *= -1
+        negCheck = -1
+    }
+    
+    let place = 10 ** Math.floor(Math.log10(x))
+    
+    while (x >= 1) {
+        let digit = x % 10;
+        x = Math.floor(x / 10);
+        
+        res += place * digit
+        
+        if (res > 2147483647) return 0;
+        
+        place /= 10;
+    }
+    
+    return res * negCheck;
+};
+
 const addBinary = (a, b) => {
     let carry = 0;
     let i = a.length - 1;
