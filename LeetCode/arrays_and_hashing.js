@@ -444,3 +444,22 @@ const frequencySort = s => {
     
     return buckets.reverse().join('');
 };
+
+const maxNumberOfBalloons = text => {
+    const obj = {
+        b: 0,
+        a: 0,
+        l: 0,
+        o: 0,
+        n: 0
+    };
+    
+    for (let chr of text) {
+        if (chr in obj) obj[chr]++;
+    }
+    
+    obj['l'] = Math.floor(obj['l'] / 2);
+    obj['o'] = Math.floor(obj['o'] / 2);
+    
+    return Math.min(...Object.values(obj))
+};
