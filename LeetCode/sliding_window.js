@@ -29,3 +29,19 @@ var lengthOfLongestSubstring = function(s) {
     
     return result
 };
+
+const lengthOfLongestSubstring = s => {
+    let result = 0;
+    let current = "";
+    
+    for (let chr of s) {
+        if (current.includes(chr)) {
+            let i = current.indexOf(chr);
+            current = current.slice(i + 1);
+        }
+        current += chr;
+        result = Math.max(result, current.length);
+    }
+    
+    return result;
+};
