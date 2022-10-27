@@ -87,3 +87,14 @@ const isPalindrome = (s, i, j) => {
     }
     return true;
 }
+
+const moveZeroes = nums => {
+    let l = 0;
+    
+    for (let r = 0; r < nums.length; r++) {
+        if (nums[r] !== 0) {
+            [nums[l], nums[r]] = [nums[r], nums[l]]
+            l++
+        }
+    }
+};
