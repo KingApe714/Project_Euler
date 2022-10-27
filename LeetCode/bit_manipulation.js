@@ -107,3 +107,13 @@ const romanToInt = s => {
     
     return num;
 };
+
+const singleNumber = nums => {
+    let res = 0
+    
+    nums.forEach(num => {
+        res = res ^ num;
+    })
+    
+    return res;
+};
