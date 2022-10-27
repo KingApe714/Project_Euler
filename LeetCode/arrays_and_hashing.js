@@ -463,3 +463,23 @@ const maxNumberOfBalloons = text => {
     
     return Math.min(...Object.values(obj))
 };
+
+const productExceptSelf = nums => {
+    let ans = [];
+    let leftPass = 1;
+    
+    for (let num of nums) {
+        ans.push(leftPass);
+        leftPass *= num;
+    }
+    
+    let rightPass = 1
+    
+    for (let i = nums.length - 1; i >= 0; i--) {
+        let num = nums[i];
+        ans[i] *= rightPass;
+        rightPass *= num;
+    }
+    
+    return ans;
+};
