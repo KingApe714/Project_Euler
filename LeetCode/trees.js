@@ -83,3 +83,17 @@ const maxDepth = (root, current=1) => {
     
     return Math.max(left, right);
 };
+
+const findBottomLeftValue = root => {
+    const queue = [ root ];
+    let current
+    
+    while (queue.length) {
+        current = queue.shift();
+        
+        if (current.right) queue.push(current.right)
+        if (current.left) queue.push(current.left)
+    }
+    
+    return current.val
+};
