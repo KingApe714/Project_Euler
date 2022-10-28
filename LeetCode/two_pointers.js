@@ -98,3 +98,27 @@ const moveZeroes = nums => {
         }
     }
 };
+
+const rotate = (nums, k) => {
+    //I can reverse the entire array, then re-reverse the array from the position of k
+    k %= nums.length;
+    
+    let l = 0, r = nums.length - 1;
+    reverse(nums, l, r)
+    
+    l = 0;
+    r = k - 1;
+    reverse(nums, l, r)
+    
+    l = k;
+    r = nums.length - 1
+    reverse(nums, l, r)
+};
+
+const reverse = (arr, i, j) => {
+    while (i < j) {
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+        i++;
+        j--;
+    }
+}
