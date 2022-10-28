@@ -122,3 +122,25 @@ const reverse = (arr, i, j) => {
         j--;
     }
 }
+
+const removeDuplicates = nums => {
+    let l = 0;
+    
+    while (nums[l] !== nums[l + 1]) {
+        l++;
+    }
+    let r = l + 1;
+    
+    while (r < nums.length) {
+        if (nums[r] !== nums[r + 1]) {
+            swap(nums, l, r)
+            l++;
+        }
+        
+        r++;
+    }
+    
+    return l
+};
+
+const swap = (arr, i, j) => [arr[i], arr[j]] = [arr[j], arr[i]];
