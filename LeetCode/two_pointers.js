@@ -144,3 +144,32 @@ const removeDuplicates = nums => {
 };
 
 const swap = (arr, i, j) => [arr[i], arr[j]] = [arr[j], arr[i]];
+
+const threeSum = (nums) => {
+    nums.sort((a, b) => a - b);
+    let arr = [];
+    
+    for (let k = 0; k < nums.length - 2; k++) {
+        let i = k + 1;
+        let j = nums.length - 1;
+        
+        while (i < j) {
+            let sum = nums[k] + nums[i] + nums[j];
+            
+            if (sum === 0) {
+                arr.push([nums[k], nums[i], nums[j]])
+                while (nums[i] === nums[i + 1]) i++;
+                while (nums[j] === nums[j - 1]) j--;
+                i++;
+                j--;
+            } else if (sum < 0) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        while (nums[k] === nums[k + 1]) k++;
+    }
+    
+    return arr;
+};
