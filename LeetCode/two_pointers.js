@@ -173,3 +173,35 @@ const threeSum = (nums) => {
     
     return arr;
 };
+
+const fourSum = (nums, target) => {
+    nums.sort((a, b) => a - b)
+    let res = [];
+    
+    for (let h = 0; h < nums.length - 3; h++) {
+        for (let i = h + 1; i < nums.length - 2; i++) {
+            let j = i + 1;
+            let k = nums.length - 1;
+            
+            while (j < k) {
+                let sum = nums[h] + nums[i] + nums[j] + nums[k];
+                
+                if (sum === target) {
+                    res.push([nums[h], nums[i], nums[j], nums[k]])
+                    while (nums[j] === nums[j + 1]) j++;
+                    while (nums[k] === nums[k - 1]) k--;
+                    j++;
+                    k--;
+                } else if (sum > target) {
+                    k--;
+                } else {
+                    j++;
+                }
+            }
+            while (nums[i] === nums[i + 1]) i++;
+        }
+        while (nums[h] === nums[h + 1]) h++;
+    }
+    
+    return res;
+};
