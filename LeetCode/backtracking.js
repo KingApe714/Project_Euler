@@ -52,3 +52,20 @@ const stringSearch = (grid, s) => {
     
     return res;
 }
+
+const combine = (n, k) => {
+  if (n < k) return [];
+  if (k === 0) return [ [] ];
+  
+  const last = n;
+  const combos = combine(n - 1, k - 1);
+  const combosWithLast = [];
+  
+  for (let combo of combos) {
+      combosWithLast.unshift([...combo, last]);
+  }
+  
+  const combosWithoutLast = combine(n - 1, k);
+  
+  return [...combosWithoutLast, ...combosWithLast]
+};
