@@ -26,3 +26,20 @@ const permutations = (items) => {
     
     return perms;
 };
+
+const createCombinations = (items, k) => {
+  if (items.length < k) return [];
+  if (k === 0) return [ [] ];
+  
+  const first = items[0];
+  const combosWithFirst = createCombinations(items.slice(1), k - 1);
+  const combos = [];
+  
+  for (let combo of combosWithFirst) {
+    combos.push([first, ...combo]);
+  }
+  
+  const combosWithoutFirst = createCombinations(items.slice(1), k);
+  
+  return [...combos, ...combosWithoutFirst]
+};
