@@ -511,3 +511,25 @@ const strStr = (haystack, needle) => {
         return -1;
     }
 };
+
+const longestConsecutive = nums => {
+    const numsSet = new Set(nums)
+    let max = 0;
+    
+    for (let num of numsSet) {
+        //by placing the num - 1 checker I protect from looking at a set from the middle
+        if (numsSet.has(num - 1)) continue;
+        
+        let count = 1;
+        let check = num + 1;
+        
+        while (numsSet.has(check)) {
+            count++;
+            check++;
+        }
+        
+        max = Math.max(max, count)
+    }
+    
+    return max;
+};
