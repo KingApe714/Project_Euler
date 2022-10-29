@@ -108,3 +108,21 @@ const invertTree = root => {
     
     return root;
 };
+
+const isBalanced = root => {
+    if (!root) return true;
+    
+    const leftHeight = height(root.left);
+    const rightHeight = height(root.right);
+    const balanced = Math.abs(leftHeight - rightHeight) <= 1;
+    
+    return balanced && isBalanced(root.left) && isBalanced(root.right);
+};
+
+const height = node => {
+    if (!node) return 0;
+    
+    const maxHeight = Math.max(height(node.left), height(node.right)) + 1;
+    
+    return maxHeight
+}
