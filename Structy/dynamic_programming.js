@@ -14,3 +14,20 @@ const minChange = (amount, coins, memo={}) => {
 
     return memo[amount];
 };
+
+const countPaths = (grid, i=0, j=0, memo={}) => {
+    if (`${i},${j}` in memo) return memo[`${i},${j}`];
+    if (i === grid.length) return 0;
+    if (j === grid[0].length) return 0;
+    if (grid[i][j] === 'X') return 0;
+    if (i === grid.length - 1 && j === grid[0].length - 1) return 1;
+    
+    let count = 0;
+    
+    count += countPaths(grid, i + 1, j, memo);
+    count += countPaths(grid, i, j + 1, memo);
+    
+    memo[`${i},${j}`] = count;
+    
+    return count;
+  };
