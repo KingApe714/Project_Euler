@@ -26,3 +26,18 @@ const coinChange = (coins, amount, memo={}) => {
     
     return memo[amount];
 };
+
+const uniquePaths = (m, n, memo = {}) => {
+    const pos = `${m},${n}`;
+    if (pos in memo) return memo[pos];
+    if (m === 0 || n ===0) return 0;
+    if (m === 1 && n === 1) return 1;
+    
+    const path1 = uniquePaths(m - 1, n, memo);
+    const path2 = uniquePaths(m, n - 1, memo);
+    const count = path1 + path2;
+    
+    memo[pos] = count;
+    
+    return memo[pos];
+};
