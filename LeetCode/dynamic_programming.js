@@ -41,3 +41,23 @@ const uniquePaths = (m, n, memo = {}) => {
     
     return memo[pos];
 };
+
+const stoneGame = piles => {
+    const scoreToBeat = Math.floor(piles.reduce((acc, ele) => acc + ele, 0) / 2);
+    
+    const dp = (aliceScore, i, j, memo = {}) => {
+        const pos = `${i},${j}`;
+        if (pos in memo) return memo[pos];
+        if (aliceScore > scoreToBeat) return true;
+        if (i === j) return aliceScore > scoreToBeat;
+
+        const attempt1 = dp(aliceScore + piles[i], i + 1, j, memo);
+        const attempt2 = dp(aliceScore + piles[j], i, j - 1, memo);
+
+        memo[pos] = attempt1 || attempt2;
+
+        return memo[pos];
+    }
+    
+    return dp(0, 0, piles.length - 1)
+};
