@@ -117,3 +117,15 @@ const singleNumber = nums => {
     
     return res;
 };
+
+const getSum = (a, b) => {
+
+    while (b !== 0) {
+        const xor = (a ^ b);
+        const carry = ((a & b) << 1);
+        
+        a = xor;
+        b = carry
+    }
+    return a;
+};
