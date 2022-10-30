@@ -108,3 +108,28 @@ const flipTree = (root) => {
   
   return root;
 };
+
+const lowestCommonAncestor = (root, val1, val2) => {
+  const set2 = new Set(path(root, val2));
+  
+  for (let val of path(root, val1)) {
+    if (set2.has(val)) return val;
+  }
+};
+
+const path = (root, val) => {
+  if (!root) return null;
+  if (root.val === val) return [ val ];
+  
+  const leftPath = path(root.left, val);
+  if (leftPath) {
+    return [...leftPath, root.val];
+  }
+  
+  const rightPath = path(root.right, val);
+  if (rightPath) {
+    return [...rightPath, root.val];
+  }
+  
+  return null;
+}
