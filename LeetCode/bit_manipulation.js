@@ -122,7 +122,7 @@ const getSum = (a, b) => {
 
     while (b !== 0) {
         const xor = (a ^ b);
-        const carry = ((a & b) << 1);
+        const carry = ((a & b) << 1); //this is a bitwise and operator and << is shifting the number by one place
         
         a = xor;
         b = carry

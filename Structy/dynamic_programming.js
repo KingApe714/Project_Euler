@@ -47,3 +47,22 @@ const countPaths = (grid, i=0, j=0, memo={}) => {
     
     return max;
   };
+
+  const summingSquares = (n, memo={}) => {
+    if (n === 0) return 0;
+    if (n in memo) return memo[n];
+    
+    let min = Infinity;
+    
+    for (let i = 1; i <= Math.sqrt(n); i++) {
+      let square = i ** 2
+      let res = Infinity;
+      if (n - square < 0) break
+      
+      res = summingSquares(n - square, memo);
+      min = Math.min(min, res);
+    }
+    
+    memo[n] = 1 + min;
+    return 1 + min;
+  };
