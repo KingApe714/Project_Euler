@@ -126,3 +126,17 @@ const height = node => {
     
     return maxHeight
 }
+
+const lowestCommonAncestor = (root, p, q) => {
+    let current = root;
+    
+    while (current) {
+        if (current.val < p.val && current.val < q.val) {
+            current = current.right
+        } else if (current.val > p.val && current.val > q.val) {
+            current = current.left
+        } else {
+            return current;
+        }
+    }
+}
