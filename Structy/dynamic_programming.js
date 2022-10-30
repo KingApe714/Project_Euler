@@ -31,3 +31,19 @@ const countPaths = (grid, i=0, j=0, memo={}) => {
     
     return count;
   };
+
+  const maxPathSum = (grid, i = 0, j = 0, memo = {}) => {
+    const pos = `${i},${j}`;
+    if (pos in memo) return memo[pos];
+    if (i === grid.length) return 0;
+    if (j === grid[0].length) return 0;
+    if (i === grid.length - 1 && j === grid[0].length - 1) return grid[i][j];
+    
+    let path1 = grid[i][j] + maxPathSum(grid, i + 1, j, memo);
+    let path2 = grid[i][j] + maxPathSum(grid, i, j + 1, memo);
+    let max = Math.max(path1, path2);
+    
+    memo[pos] = max;
+    
+    return max;
+  };
