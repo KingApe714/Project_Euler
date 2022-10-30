@@ -96,3 +96,15 @@ const lexicalOrder = (word1, word2, alphabet) => {
   
   return true;
 };
+
+const flipTree = (root) => {
+  if (!root) return null;
+  
+  const rightTree = flipTree(root.right);
+  const leftTree = flipTree(root.left);
+  
+  root.right = leftTree;
+  root.left = rightTree;
+  
+  return root;
+};
