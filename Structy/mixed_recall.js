@@ -133,3 +133,37 @@ const path = (root, val) => {
   
   return null;
 }
+
+const detectDictionary = (dictionary, alphabet) => {
+  for (let i = 0; i < dictionary.length - 1; i++) {
+    let word1 = dictionary[i];
+    let word2 = dictionary[i + 1];
+    
+    if (!isLexical(word1, word2, dictionary, alphabet)) {
+      return false;
+    }
+  }
+  
+  return true;
+};
+
+const isLexical = (word1, word2, dictionary, alphabet) => {
+  let length = Math.max(word1.length, word2.length);
+  const alpha = {};
+  
+  for (let i = 0; i < alphabet.length; i++) {
+    alpha[alphabet[i]] = i;
+  }
+  
+  for (let i = 0; i < length; i++) {
+    let chr1 = word1[i];
+    let chr2 = word2[i];
+    let idx1 = alpha[chr1] ? alpha[chr1] : -1;
+    let idx2 = alpha[chr2] ? alpha[chr2] : -1;
+    
+    if (idx1 < idx2) return true;
+    if (idx1 > idx2) return false;
+  }
+  
+  return true;
+}
