@@ -66,3 +66,22 @@ const countPaths = (grid, i=0, j=0, memo={}) => {
     memo[n] = 1 + min;
     return 1 + min;
   };
+
+  const arrayStepper = (nums, idx = 0, memo = {}) => {
+    if (idx in memo) return memo[idx];
+    if (idx >= nums.length - 1) return true;
+    
+    let ele = nums[idx];
+    
+    while (ele > 0) {
+      if (arrayStepper(nums, idx + ele, memo)) {
+        memo[idx] = true;
+        return true;
+      }
+      ele--;
+    }
+    
+    memo[idx] = false;
+    
+    return memo[idx]
+  };
