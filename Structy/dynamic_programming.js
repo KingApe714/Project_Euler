@@ -85,3 +85,24 @@ const countPaths = (grid, i=0, j=0, memo={}) => {
     
     return memo[idx]
   };
+
+  const maxPalinSubsequence = (str, i = 0, j = str.length - 1, memo = {}) => {
+    let pos = `${i},${j}`;
+    if (pos in memo) return memo[pos];
+    if (i === j) return 1;
+    if (i > j) return 0;
+    
+    let count = 0;
+    
+    if (str[i] === str[j]) {
+      count += 2 + maxPalinSubsequence(str, i + 1, j - 1, memo)
+    } else {
+      let left = maxPalinSubsequence(str, i + 1, j, memo);
+      let right = maxPalinSubsequence(str, i, j - 1, memo);
+      count += Math.max(left, right);
+    }
+    
+    memo[pos] = count;
+    
+    return count;
+  };
