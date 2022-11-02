@@ -175,3 +175,22 @@ const canConcat = (s, words, memo = {}) => {
   
   return false;
 };
+
+const quickestConcat = (s, words, memo = {}) => {
+  if (s.length === 0) return 0;
+  if (s in memo) return memo[s];
+  
+  let min = Infinity;
+  
+  for (let word of words) {
+    if (s.startsWith(word)) {
+      let res = quickestConcat(s.slice(word.length), words, memo);
+      if (res !== -1) {
+        min = Math.min(min, res);
+      }
+    }
+  }
+  
+  memo[s] = min === Infinity ? -1 : 1 + min;
+  return memo[s];
+};
