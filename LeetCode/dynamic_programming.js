@@ -74,3 +74,25 @@ const numSquares = n => {
     
     return dp[n]
 };
+
+const isInterleave = (s1, s2, s3, i = 0, j = 0, k = 0, memo = {}) => {
+    const key = `${i},${j}`
+    
+    if (key in memo) return memo[key];
+    if (s1.length + s2.length !== s3.length) return false;
+    if (k >= s3.length) return true;
+    
+    let res1 = false
+    let res2 = false
+    
+    if (s1[i] === s3[k]) {
+        res1 = isInterleave(s1, s2, s3, i + 1, j, k + 1, memo);
+    }
+    if (s2[j] === s3[k]) {
+        res2 = isInterleave(s1, s2, s3, i, j + 1, k + 1, memo);
+    }
+    
+    memo[key] = res1 || res2;
+    
+    return memo[key];
+};
