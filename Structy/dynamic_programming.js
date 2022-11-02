@@ -135,3 +135,23 @@ const countPaths = (grid, i=0, j=0, memo={}) => {
     
     return memo[i];
   };
+
+  const countingChange = (amount, coins, i = 0, memo = {}) => {
+    const key = `${i},${amount}`
+    
+    if (key in memo) return memo[key];
+    if (amount === 0) return 1;
+    
+    let total = 0;
+    
+    for (let qty = 0; coins[i] * qty <= amount; qty += 1) {
+      let rem = amount  - (qty * coins[i]);
+      //because I amm looking at different amounts and indices I should be 
+      //creating amout and index keys in my memo
+      total += countingChange(rem, coins, i + 1, memo);
+    }
+    
+    memo[key] =  total;
+    
+    return memo[key];
+  };
