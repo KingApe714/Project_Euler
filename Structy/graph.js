@@ -374,3 +374,34 @@ const traverseIsland = (grid, r, c, visited) => {
 
     return visited;
 }
+
+const hasCycle = (graph) => {
+    const visited = new Set();
+    const visiting = new Set();
+    
+    for (let node in graph) {
+      if (traverse1(graph, node, visited, visiting)) {
+        return true;
+      }
+    }
+    
+    return false;
+  }
+  
+const traverse1 = (graph, node, visited, visiting) => {
+    if (visited.has(node)) return false;
+    if (visiting.has(node)) return true;
+
+    visiting.add(node);
+
+    for (let n of graph[node]) {
+        if (traverse1(graph, n, visited, visiting)) {
+        return true;
+        }
+    }
+
+    visiting.delete(node);
+    visited.add(node);
+
+    return false;
+}
