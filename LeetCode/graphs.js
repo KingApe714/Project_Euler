@@ -107,3 +107,49 @@ const isAlienSorted = (words, order) => {
     
     return true;
 };
+
+const canFinish = (num, prereqs) => {
+    const graph = buildGraph(num, prereqs);
+    const visiting = new Set();
+    const visited = new Set();
+
+    console.log(graph)
+    for (let node in graph) {
+        if (hasCycle(graph, node, visiting, visited)) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
+const hasCycle = (graph, node, visiting, visited) => {
+    if (visited.has(node)) return false;
+    if (visiting.has(node)) return true;
+
+    visiting.add(node);
+
+    for (let n of graph[node]) {
+        if (hasCycle(graph, n, visiting, visited)) return true;
+    }
+
+    visiting.delete(node);
+    visited.add(node);
+
+    return false;
+}
+
+const buildGraph = (num, prereqs) => {
+    const graph = {};
+
+    for (let i = 0; i < num; i++) {
+        graph[i] = [];
+    }
+
+    for (let prereq of prereqs) {
+        const [a, b] = prereq;
+        graph[a].push(b);
+    }
+
+    return graph;
+}
