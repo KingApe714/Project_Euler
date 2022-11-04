@@ -405,3 +405,46 @@ const traverse1 = (graph, node, visited, visiting) => {
 
     return false;
 }
+
+const prereqsPossible = (numCourses, prereqs) => {
+    const graph = buildGraph3(numCourses, prereqs);
+    const visiting = new Set();
+    const visited = new Set();
+    
+    for (let node in graph) {
+      if (hasCycle1(node, graph, visiting, visited)) {
+        return false;
+      }
+    }
+    
+    return true;
+}
+
+const hasCycle1 = (node, graph, visiting, visited) => {
+    if (visited.has(node)) return false;
+    if (visiting.has(node)) return true;
+
+    visiting.add(node);
+
+    for (let n of graph[node]) {
+        if (hasCycle1(n, graph, visiting, visited)) return true;
+    }
+
+    visiting.delete(node);
+    visited.add(node);
+
+    return false;
+}
+
+const buildGraph3 = (numCourses, prereqs) => {
+    const graph = {};
+    for (let i = 0; i < numCourses; i++)
+        graph[i] = [];
+
+    for (let prereq of prereqs) {
+        const [a, b] = prereq;
+        graph[a].push(String(b));
+    }
+
+    return graph;
+}
