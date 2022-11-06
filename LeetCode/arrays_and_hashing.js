@@ -533,3 +533,22 @@ const longestConsecutive = nums => {
     
     return max;
 };
+
+const minSwaps = s => {
+    let maxClosing = 0;
+    let extraClosing = 0;
+
+    for (let char of s) {
+        if (char === ']') {
+            extraClosing++;
+        } else {
+            extraClosing--;
+        }
+
+        if (extraClosing > maxClosing) {
+            maxClosing = extraClosing;
+        }
+    }
+
+    return Math.ceil(maxClosing / 2);
+};
