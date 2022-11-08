@@ -144,3 +144,34 @@ const deleteDuplicates = head => {
     
     return head;
 };
+
+const removeNthFromEnd = (head, n) => {
+    let length = 0;
+    let current = head;
+
+    while (current) {
+        current = current.next;
+        length++;
+    }
+
+    const nth = length - n - 1;
+
+    if (nth < 0) return head.next;
+
+    current = head;
+    for (let i = 0; i < nth; i++) {
+        current = current.next;
+    }
+
+    if (current.next) {
+        if (current.next.next) {
+            current.next = current.next.next;
+        } else {
+            current.next = null;
+        }
+    } else {
+        
+    }
+
+    return head;
+};
