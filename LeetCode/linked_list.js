@@ -175,3 +175,56 @@ const removeNthFromEnd = (head, n) => {
 
     return head;
 };
+
+const sortList = head => {
+    if (head === null || head.next === null) return head;
+    const length = getLength(head);
+    const mid = Math.floor(length / 2);
+    let [left, right] = getLeftRight(head, mid);
+    left = sortList(left);
+    right = sortList(right);
+
+    return merge(left, right);
+};
+
+const merge = (left, right) => {
+    let dummyHead = new ListNode(null);
+    let current = dummyHead;
+    
+    while (left && right) {
+        if (left.val < right.val) {
+            current.next = left;
+            left = left.next;
+        } else {
+            current.next = right;
+            right = right.next;
+        }
+        current = current.next;
+    }
+
+    if (left) current.next = left;
+    if (right) current.next = right;
+
+    return dummyHead.next;
+}
+
+const getLeftRight = (node, mid) => {
+    let left = node;
+    let current = node;
+
+    for (let i = 1; i < mid; i++) {
+        current = current.next;
+    }
+    let right = current.next;
+    current.next = null;
+    return [left, right]
+}
+
+const getLength = node => {
+    let length = 0;
+    while (node) {
+        length++;
+        node = node.next;
+    }
+    return length;
+}
