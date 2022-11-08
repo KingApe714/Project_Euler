@@ -228,3 +228,28 @@ const getLength = node => {
     }
     return length;
 }
+
+const partition = (head, x) => {
+    let leftList = new ListNode(null);
+    let left = leftList;
+    let rightList = new ListNode(null);
+    let right = rightList;
+    let current = head;
+
+    while (current) {
+        if (current.val < x) {
+            leftList.next = current;
+            leftList = leftList.next;
+        } else {
+            rightList.next = current;
+            rightList = rightList.next;
+        }
+
+        current = current.next;
+    }
+
+    rightList.next = null;
+    leftList.next = right.next;
+
+    return left.next;
+};
