@@ -253,3 +253,43 @@ const partition = (head, x) => {
 
     return left.next;
 };
+
+const reorderList = head => {
+    let slow = head;
+    let fast = head;
+    
+    while (fast && fast.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+
+    let reverse = reverseList1(slow);
+    let current = head;
+    let next = null;
+    // console.log(reverse)
+    console.log(current)
+
+    while (reverse.next) {
+        next = current.next;
+        current.next = reverse;
+        current = next;
+
+        next = reverse.next;
+        reverse.next = current;
+        reverse = next;
+    }
+};
+
+const reverseList1 = node => {
+    let tail = null;
+    let current = node;
+    
+    while (current) {
+        let next = current.next
+        current.next = tail;
+        tail = current;
+        current = next;
+    }
+    
+    return tail;
+}
