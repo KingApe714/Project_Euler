@@ -167,3 +167,18 @@ const isLexical = (word1, word2, dictionary, alphabet) => {
   
   return true;
 }
+
+const leftyNodes = (root) => {
+  const values = [];
+  traverse(root, 0, values);
+  return values;
+};
+
+const traverse = (root, level, values) => {
+  if (!root) return;
+  
+  if (values.length === level) values.push(root.val);
+  
+  traverse(root.left, level + 1, values);
+  traverse(root.right, level + 1, values);
+}
